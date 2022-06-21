@@ -2,18 +2,43 @@
   "name": "auction_app",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gyuholee-dev/auction_app.git"
-  },
   "author": "GyuhoLee",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gyuholee-dev/auction_app/issues"
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js",
+    "serve": "webpack serve",
+    "watch": "webpack --watch --mode=development",
+    "build": "webpack --mode=production",
+    "build-all": "webpack --mode=development && webpack --mode=production"
   },
-  "homepage": "https://github.com/gyuholee-dev/auction_app#readme"
+  "nodemonConfig": {
+    "ignore": [
+      ".git",
+      "node_modules/",
+      "sessions/",
+      "views/"
+    ]
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "sass": "^1.52.3",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.2"
+  }
 }
