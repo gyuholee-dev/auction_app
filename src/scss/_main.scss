@@ -1,0 +1,79 @@
+#root {
+  @include flex(center, start, column);
+  width: 100%;
+  // max-width: $max-width;
+  margin: 0 auto;
+  position: relative;
+  min-height: 100vh;
+}
+
+header, footer {
+  @include flex(center, space-between);
+  width: 100%;
+  position: relative;
+}
+
+menu {
+  @include flex(center, space-between);
+  width: 100%;
+  position: relative;
+}
+
+main,
+article,
+section {
+  @include flex(start, center);
+  width: 100%;
+  position: relative;
+}
+
+aside {
+  @include flex(center, start, column);
+  position: relative;
+  width: 0;
+}
+
+// -----------------------------------------------------------------------------
+
+body {
+  background-color: $grey-95;
+}
+
+menu {
+  background-color: $white;
+  height: 56px;
+  padding: 0 10px;
+  position: fixed;
+  &.top {
+    top: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  &.bottom {
+    bottom: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .btn {
+    font-size: 24px;
+    width: 36px;
+    &:hover {
+      color: var(--color-text-link);
+    }
+  }
+  &.bottom .btn {
+    @include flex(center, center, column);
+    width: 15%;
+    overflow: visible;
+    &:last-child {
+      margin-right: 10px;
+    }
+    >span {
+      font-size: 12px;
+    }
+  }
+}
+
+
