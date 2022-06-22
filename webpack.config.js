@@ -5,17 +5,22 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export default (env, argv)=>{
+export default (env, argv) => {
   const watch = (env && env.WEBPACK_WATCH) ? (env.WEBPACK_WATCH === 'true') : false; // true | false
   const mode = (argv && argv.mode) ? argv.mode : 'development'; // "production" | "development" | "none"
-  const filename = (mode === 'production') ? 'js/bundle.min.js' : 'js/bundle.js';
+  const filename = (mode === 'production') ? 'scripts/bundle.min.js' : 'scripts/bundle.js';
   const distDir = path.resolve('public');
 
   const entry = ['./src/main'];
 
   const plugins = [
     new CleanWebpackPlugin({
-      cleanAfterEveryBuildPatterns: ['dist']
+      cleanOnceBeforeBuildPatterns: [
+        '**/*',
+        '!static-files*',
+        '!images/**',
+      ],
+      // cleanAfterEveryBuildPatterns: ['dist']
     }),
     new HtmlWebpackPlugin({
       minify: {
@@ -29,7 +34,7 @@ export default (env, argv)=>{
 
   if(mode === 'production') {
     plugins.push(new MiniCssExtractPlugin({
-      filename: 'css/style.min.css',
+      filename: 'styles/style.min.css',
     }));
   }
   const styleLoader = (mode === 'production') ? MiniCssExtractPlugin.loader : 'style-loader';
@@ -47,13 +52,17 @@ export default (env, argv)=>{
       hot: true,
       compress: true,
       port: 9000,
+      static: { 
+        directory: distDir, 
+        publicPath: '/'
+      }
     },
     entry: entry,
     resolve: {
     	extensions: [ '.js', '.jsx'],
       modules: [path.resolve('node_modules'), 'node_modules'],
     },
-    devtool: 'source-map',
+    devtool: (mode === 'production') ? 'cheap-module-source-map':'inline-source-map',
     plugins: plugins,
     module: {
       rules: [
@@ -95,16 +104,11 @@ export default (env, argv)=>{
         // },
         // 폰트 로더
         {
-          test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: '[name].[hash:8].[ext]',
-                outputPath: 'fonts/'
-              },
-            },
-          ],
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: './fonts/[name].[hash:8].[ext]',
+          },
         },
       ]
     },
