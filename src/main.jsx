@@ -17,3 +17,6 @@ import './scss/style.scss';
 // const root = createRoot(document.getElementById('root'));
 // root.render(<Home />);
 
+// const menu = document.querySelectorAll('.menu');
+// console.log(menu);
+
