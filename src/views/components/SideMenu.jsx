@@ -6,17 +6,20 @@ export default class SideMenu extends Component {
   }
   
   render() {
+
+    const toggleMenu = this.props.toggleMenu;
+    const dimmClass = this.props.modal?'dimm show active':'dimm';
+    const menuClass = this.props.open?'open':'close';
+
     return (
       <aside id="sidemenu">
-        <div className="dimm"></div>
-        <nav id="homemenu"
-          className={this.props.open ? 'open' : 'close'}
-        >
+        <div className={dimmClass} onClick={toggleMenu}></div>
+        <nav id="homemenu" className={menuClass}>
           <div className="header">
             <div className="user"></div>
-            <button className="btn none close"
-              onClick={this.props.toggleMenu}
-            ><i className="xi-close"></i></button>
+            <button className="btn none close" onClick={toggleMenu}>
+              <i className="xi-close"></i>
+            </button>
           </div>
         </nav>
       </aside>
