@@ -112,6 +112,9 @@ export default (env, argv) => {
         },
       ]
     },
+    resolve: {
+      extensions: ['.js', '.jsx']
+    },
     output: {
       path: distDir,
       publicPath: '/',

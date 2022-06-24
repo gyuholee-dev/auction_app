@@ -1,13 +1,13 @@
 import * as url from 'url';
 
 import React, { Component }  from 'react';
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import { createRoot } from 'react-dom/client';
 
-import { Home } from './views';
+import Home from './views/Home';
 
 // scss
-import './scss/style.scss';
+import './styles/style.scss';
 
 // -----------------------------------------------------------------------
 
@@ -15,7 +15,6 @@ import './scss/style.scss';
 // const pathname = urls.pathname;
 // const query = urls.query;
 
+// ReactDOM.render(<Home />, document.body);
 const root = createRoot(document.getElementById('root'));
 root.render(<Home />);
-
-

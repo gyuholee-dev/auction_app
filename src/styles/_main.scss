@@ -71,7 +71,7 @@ nav {
   }
 }
 #bottommenu {
-  position: sticky;
+  position: fixed;
   bottom: 0;
   z-index: 9;
   border-top: 1px solid rgba(black, 0.35);
@@ -120,6 +120,7 @@ nav {
 main {
   height: auto;
   flex-grow: 1;
+  margin-bottom: $height-nav;
   // overflow-y: scroll;
 
   section {
