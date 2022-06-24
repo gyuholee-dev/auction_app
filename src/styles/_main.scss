@@ -39,6 +39,8 @@ aside {
   z-index: 10;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  opacity: 0;
 }
 
 // -----------------------------------------------------------------------------
@@ -88,9 +90,9 @@ nav {
   }
 }
 
-#sidemenu {
-  display: none;
-}
+// #sidemenu {
+//   display: none;
+// }
 
 #homemenu {
   @include flex(center, start, column);
@@ -102,6 +104,11 @@ nav {
   width: 75%;
   padding: 0;
   height: initial;
+  transform: translateX(-100%);
+  transition: transform 0.25s;
+  &.open {
+    transform: translateX(0);
+  }
   .header {
     @include flex(center, space-between);
     width: 100%;
