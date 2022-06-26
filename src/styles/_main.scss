@@ -1,5 +1,5 @@
 // body {
-//   overflow: hidden;
+//   overflow-y: scroll;
 // }
 
 #root {
@@ -74,11 +74,21 @@ nav {
   top: 0;
   z-index: 9;
   border-bottom: 1px solid rgba(black, 0.35);
+  transition: top 0.25s;
+  &.hide {
+    position: fixed;
+    top: 0 - $height-nav;
+  }
+  &.show {
+    position: fixed;
+    top: 0;
+  }
   .title {
     font-size: 18px;
     font-weight: bold;
   }
 }
+
 #bottommenu {
   position: fixed;
   bottom: 0;
@@ -136,7 +146,7 @@ main {
   flex-grow: 1;
   padding-top: $height-nav;
   padding-bottom: $height-nav;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 
   section {
     width: 100%;
