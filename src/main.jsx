@@ -1,7 +1,6 @@
 import * as url from 'url';
 
-import React, { Component }  from 'react';
-// import ReactDOM from "react-dom";
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import Home from './views/Home';
@@ -15,6 +14,5 @@ import './styles/style.scss';
 // const pathname = urls.pathname;
 // const query = urls.query;
 
-// ReactDOM.render(<Home />, document.body);
 const root = createRoot(document.getElementById('root'));
 root.render(<Home />);

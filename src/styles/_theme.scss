@@ -25,6 +25,7 @@
     --color-box-emp: rgba(41, 205, 255, 0.15);
 
     --color-light: #{$white};
+    --color-scrollbar: #{$grey-65};
   }
   body.theme-dark {
     --color-background: #{$grey-10};
@@ -52,6 +53,7 @@
     --color-box-emp: rgba(41, 205, 255, 0.15);
     
     --color-light: #{$grey-25};
+    --color-scrollbar: #{$grey-65};
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -80,6 +82,7 @@
     --color-box-antique: #24170f;
     
     --color-light: #{$grey-25};
+    --color-scrollbar: #{$grey-65};
   }
   body.theme-light {
     --color-background: #{$grey-95};
@@ -106,6 +109,7 @@
     --color-box-antique: antiquewhite;
 
     --color-light: #{$white};
+    --color-scrollbar: #{$grey-65};
   }
 }
 

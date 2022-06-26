@@ -1,9 +1,11 @@
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 import path from 'path';
 
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+// import RefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 export default (env, argv) => {
   const watch = (env && env.WEBPACK_WATCH) ? (env.WEBPACK_WATCH === 'true') : false; // true | false
@@ -13,6 +15,7 @@ export default (env, argv) => {
 
   const entry = ['./src/main'];
 
+  const babelPlugins = [];
   const plugins = [
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
@@ -36,6 +39,9 @@ export default (env, argv) => {
     plugins.push(new MiniCssExtractPlugin({
       filename: 'styles/style.min.css',
     }));
+  } else {
+    // plugins.push(new RefreshWebpackPlugin());
+    // babelPlugins.push('react-refresh/babel');
   }
   const styleLoader = (mode === 'production') ? MiniCssExtractPlugin.loader : 'style-loader';
 
@@ -45,13 +51,15 @@ export default (env, argv) => {
     watchOptions: {
       ignored: /node_modules/,
     },
+    // cache: false,
     devServer: {
-      static: false,
       watchFiles: ["./src/*", "./src/**/*"],
       open: true,
       hot: true,
+      liveReload: true,
       compress: true,
       port: 9000,
+      // static: false,
       static: { 
         directory: distDir, 
         publicPath: '/'
@@ -62,7 +70,7 @@ export default (env, argv) => {
     	extensions: [ '.js', '.jsx'],
       modules: [path.resolve('node_modules'), 'node_modules'],
     },
-    devtool: (mode === 'production') ? 'cheap-module-source-map':'inline-source-map',
+    devtool: (mode === 'development') ? 'inline-source-map':'cheap-module-source-map',
     plugins: plugins,
     module: {
       rules: [
@@ -75,7 +83,7 @@ export default (env, argv) => {
              '@babel/preset-env', 
              '@babel/preset-react'
             ],
-            plugins: [], 
+            plugins: babelPlugins,
           },
           exclude: /node_modules/
         },
@@ -112,6 +120,7 @@ export default (env, argv) => {
         },
       ]
     },
+    target: 'web',
     resolve: {
       extensions: ['.js', '.jsx']
     },
