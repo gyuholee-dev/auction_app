@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useScroll } from '../customhooks';
 
 export default function TopMenu(props) {
-
+  
+  const navigate = useNavigate();
   const {toggleMenu} = props;
 
   const { scrollY, scrollDirection } = useScroll();
@@ -31,7 +33,10 @@ export default function TopMenu(props) {
         <i className="xi-bars"></i>
       </button>
       <div className="title">슈퍼레어</div>
-      <button className="btn none"><i className="xi-search"></i></button>
+      <button className="btn none"
+        onClick={()=>navigate('/search')}>
+        <i className="xi-search"></i>
+      </button>
     </nav>
   );
 }
