@@ -20,7 +20,7 @@ export default function Home(props) {
   }
 
   return (
-    <>
+    <div id="page-home">
       <Dimmer dimm={sideMenu} toggle={toggleMenu}/>
       <SideMenu 
         sideMenu={sideMenu}
@@ -29,6 +29,6 @@ export default function Home(props) {
       <TopMenu toggleMenu={toggleMenu}/>
       <Main />
       <BottomMenu />
-    </>
+    </div>
   )
 }

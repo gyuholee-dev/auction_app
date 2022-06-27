@@ -14,7 +14,7 @@ export default function Dimmer(props) {
       setDimmClass('dimm show active');
     } else {
       setDimmClass('dimm show ');
-      await timeout(350);
+      await timeout(250);
       setDimmClass('dimm ');
     }
   }

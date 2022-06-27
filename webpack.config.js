@@ -60,6 +60,7 @@ export default (env, argv) => {
       compress: true,
       port: 9000,
       // static: false,
+      historyApiFallback: true,
       static: { 
         directory: distDir, 
         publicPath: '/'

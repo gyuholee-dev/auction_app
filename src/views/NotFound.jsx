@@ -9,6 +9,7 @@ import {
 } from './components';
 
 export default function NotFound(props) {
+  
   const { 
     title = `😢 404 NOT FOUND 😢`, 
     message = `아직 안만들었습니다...` 
@@ -22,7 +23,7 @@ export default function NotFound(props) {
   }
 
   return (
-    <>
+    <div id="page-notfound">
       <Dimmer dimm={sideMenu} toggle={toggleMenu}/>
       <SideMenu 
         sideMenu={sideMenu}
@@ -37,6 +38,6 @@ export default function NotFound(props) {
         </section>
       </main>
       <BottomMenu />
-    </>
+    </div>
   );
 }

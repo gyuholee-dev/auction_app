@@ -1,6 +1,7 @@
 @media (prefers-color-scheme: light) {
   body {
     --color-background: #{$grey-95};
+    --color-background-app: #{$white};
     --color-header: rgba(255,255,255, 0.65);
     --color-nav: #{$white};
     --color-section: #{$white};
@@ -29,6 +30,7 @@
   }
   body.theme-dark {
     --color-background: #{$grey-10};
+    --color-background-app: #{$black};
     --color-header: rgba(0,0,0, 0.75);
     --color-nav: #{$grey-5};
     --color-section: #{$grey-10};
@@ -59,6 +61,7 @@
 @media (prefers-color-scheme: dark) {
   body {
     --color-background: #{$grey-10};
+    --color-background-app: #{$black};
     --color-header: rgba(0,0,0, 0.75);
     --color-nav: #{$grey-5};
     --color-section: #{$grey-10};
@@ -86,6 +89,7 @@
   }
   body.theme-light {
     --color-background: #{$grey-95};
+    --color-background-app: #{$white};
     --color-header: rgba(255,255,255, 0.65);
     --color-nav: #{$white};
     --color-section: #{$white};
@@ -111,6 +115,10 @@
     --color-light: #{$white};
     --color-scrollbar: #{$grey-65};
   }
+}
+
+#app-root {
+  background-color: var(--color-background-app);
 }
 
 body {

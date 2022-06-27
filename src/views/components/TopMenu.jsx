@@ -8,24 +8,24 @@ export default function TopMenu(props) {
   const navigate = useNavigate();
   const {toggleMenu} = props;
 
-  const { scrollY, scrollDirection } = useScroll();
   const [menuClass, setMenuClass] = useState('menu top');
+  // const { scrollY, scrollDirection } = useScroll();
 
-  function setClass() {
-    if (scrollDirection === 'up') {
-      if (scrollY < 56) {
-        setMenuClass('menu top');
-      } else {
-        setMenuClass('menu top hide');
-      }
-    } else if (scrollDirection === 'down') {
-      setMenuClass('menu top show');
-    }
-  }
+  // function setClass() {
+  //   if (scrollDirection === 'up') {
+  //     if (scrollY < 56) {
+  //       setMenuClass('menu top');
+  //     } else {
+  //       setMenuClass('menu top hide');
+  //     }
+  //   } else if (scrollDirection === 'down') {
+  //     setMenuClass('menu top show');
+  //   }
+  // }
 
-  useEffect(() => {
-    setClass();
-  });
+  // useEffect(() => {
+  //   setClass();
+  // });
 
   return (
     <nav id="topmenu" className={menuClass}>
