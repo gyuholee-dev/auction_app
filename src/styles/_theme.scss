@@ -30,7 +30,7 @@
   }
   body.theme-dark {
     --color-background: #{$grey-10};
-    --color-background-app: #{$black};
+    --color-background-app: #{$grey-10};
     --color-header: rgba(0,0,0, 0.75);
     --color-nav: #{$grey-5};
     --color-section: #{$grey-10};
@@ -61,7 +61,8 @@
 @media (prefers-color-scheme: dark) {
   body {
     --color-background: #{$grey-10};
-    --color-background-app: #{$black};
+    --color-background-app: #{$grey-10};
+    --color-dimm: rgba(0,0,0, 0.75);
     --color-header: rgba(0,0,0, 0.75);
     --color-nav: #{$grey-5};
     --color-section: #{$grey-10};
