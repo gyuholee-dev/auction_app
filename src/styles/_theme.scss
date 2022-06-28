@@ -2,6 +2,7 @@
   body {
     --color-background: #{$grey-95};
     --color-background-app: #{$white};
+    --color-dimm: rgba(0,0,0, 0.5);
     --color-header: rgba(255,255,255, 0.65);
     --color-nav: #{$white};
     --color-section: #{$white};
@@ -31,6 +32,7 @@
   body.theme-dark {
     --color-background: #{$grey-10};
     --color-background-app: #{$grey-10};
+    --color-dimm: rgba(0,0,0, 0.75);
     --color-header: rgba(0,0,0, 0.75);
     --color-nav: #{$grey-5};
     --color-section: #{$grey-10};
@@ -91,6 +93,7 @@
   body.theme-light {
     --color-background: #{$grey-95};
     --color-background-app: #{$white};
+    --color-dimm: rgba(0,0,0, 0.5);
     --color-header: rgba(255,255,255, 0.65);
     --color-nav: #{$white};
     --color-section: #{$white};

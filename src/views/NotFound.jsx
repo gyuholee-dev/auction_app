@@ -11,7 +11,7 @@ import {
 export default function NotFound(props) {
   
   const { 
-    title = `😢 404 NOT FOUND 😢`, 
+    title = `404 NOT FOUND`, 
     message = `아직 안만들었습니다...` 
   } = props;
 
@@ -29,10 +29,9 @@ export default function NotFound(props) {
         sideMenu={sideMenu}
         toggleMenu={toggleMenu}
       />
-      <TopMenu toggleMenu={toggleMenu}/>
+      <TopMenu title={title} toggleMenu={toggleMenu}/>
       <main>
         <section id="notfound">
-          <h1 className="title">{title}</h1>
           <p>{message}</p>
           <img src="images/cording_cat.gif" />
         </section>

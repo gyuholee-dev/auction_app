@@ -6,8 +6,8 @@ export default function SideMenu(props) {
   const menuClass = sideMenu?'open':'close';
 
   return (
-    <aside id="sidemenu">
-      <nav id="homemenu" className={menuClass}>
+    <aside>
+      <nav id="sidemenu" className={menuClass}>
         <div className="header">
           <div className="user"></div>
           <button className="btn none close" onClick={toggleMenu}>

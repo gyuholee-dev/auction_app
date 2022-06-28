@@ -4,26 +4,24 @@
 
 // 마운트 전
 .fade-enter {
-  // opacity: 0;
-  transform: translateX(100%);
+  opacity: 0;
+  // transform: translateX(100%);
 }
 
 // 마운트 활성화
 .fade-enter-active {
-  // opacity: 1;
-  transform: translateX(0);
-  // transition: transform 0.5s;
+  opacity: 1;
+  // transform: translateX(0);
 }
 
 // 언마운트 전
 .fade-exit {
-  // opacity: 1;
-  transform: translateX(0);
+  opacity: 1;
+  // transform: translateX(0);
 }
 
 // 언마운트 활성화
 .fade-exit-active {
-  // opacity: 0;
-  transform: translateX(-100%);
-  // transition: transform 0.5s;
+  opacity: 0;
+  // transform: translateX(-100%);
 }
