@@ -2,47 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import cn from 'classnames';
-import { useScroll } from '../customhooks';
+// import { useScroll } from '../customhooks';
 
-
-const ButtonOpenSideMenu = (props) => {
-  const { toggleMenu } = props;
-
-  return (
-    <button className="btn none" onClick={toggleMenu}>
-      <i className="xi-bars"></i>
-    </button>
-  );
-}
-
-const ButtonNavSearch = (props) => {
-  const { search = '/search' } = props;
-  const navigate = useNavigate();
-
-  return (
-    <button className="btn none"
-      onClick={()=>navigate(search)}>
-      <i className="xi-search"></i>
-    </button>
-  );
-}
-
-const ButtonNavBack = (props) => {
-  const { back = '/' } = props;
-  const navigate = useNavigate();
-
-  return (
-    <button className="btn none"
-      onClick={()=>navigate(-1)}>
-      <i className="xi-angle-left"></i>
-    </button>
-  );
-}
 
 const ButtonTopMenu = (props) => {
-  const type = props.type || 'menu';
-  // const title = props.title || '';
-  const onClick = props.onClick;
+  const {
+    type = 'menu',
+    onClick,
+    link,
+  } = props;
   const navigate = useNavigate();
 
   switch (type) {
@@ -62,7 +30,7 @@ const ButtonTopMenu = (props) => {
     case 'back':
       return (
         <button className="btn none"
-          onClick={()=>navigate(-1)}>
+          onClick={()=>navigate(link?link:-1)}>
           <i className="xi-angle-left"></i>
         </button>
       );
@@ -74,7 +42,7 @@ export default function TopMenu(props) {
 
   const { 
     title = '슈퍼레어', 
-    path = null,
+    page = null,
     toggleMenu 
   } = props;
 
@@ -103,32 +71,38 @@ export default function TopMenu(props) {
   // });
 
   const ButtonLeft = () => {
-    switch (path) {
+    switch (page) {
       case 'home':
         return <ButtonTopMenu type='menu' onClick={toggleMenu} />
       default:
-        return <ButtonNavBack />
+        return <ButtonTopMenu type='back' link={page=='notfound'&&'/'}/>
     }
   }
 
   const ButtonRight = () => {
-    switch (path) {
+    switch (page) {
       case 'home':
         return <ButtonTopMenu type='search' />
     }
   }
 
-  const centerBlock = () => {
-    switch (path) {
+  const CenterBlock = () => {
+    switch (page) {
+      case 'category':
+        return (
+          <div className="seachbox">
+            <input type="text" name="search" placeholder="검색어를 입력하세요" />
+          </div>
+        );
       default:
-        return <h1>{title}</h1>
+        return <div className={cn('title', {'center':page=='home'})}>{title}</div>
     }
   }
 
   return (
     <nav id="topmenu" className="menu top">
       <ButtonLeft />
-      <div className={cn('title', {'center':path=='home'})}>{title}</div>
+      <CenterBlock />
       <ButtonRight />
     </nav>
   );

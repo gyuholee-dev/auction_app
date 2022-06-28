@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Home from './views/Home';
+import Category from './views/Category';
 import NotFound from './views/NotFound';
 
 // scss
@@ -22,6 +23,7 @@ function App() {
       <CSSTransition key={location.pathname} classNames="fade" timeout={150}>
         <Routes location={location}>
           <Route path="/" element={<Home />} />
+          <Route path="/category" element={<Category />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </CSSTransition>

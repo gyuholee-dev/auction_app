@@ -2,10 +2,18 @@ import React from 'react';
 
 export default function Main(props) {
 
+  const imgslide = (
+    <section id="imgslide">
+      <div className="imgs">
+        <img src="/images/Eab45nOX0AAxAQm.jpeg" alt="PS5" />
+      </div>
+    </section>
+  );
+
   const count = 20;
-  const itemList = [];
+  const items = [];
   for (let i = 0; i < count; i++) {
-    itemList.push(
+    items.push(
       <div key={i} className="item">
         <div className="img">
           <img src="/images/Eab45nOX0AAxAQm.jpeg" alt="PS5" />
@@ -22,19 +30,16 @@ export default function Main(props) {
       </div>
     );
   }
+  const itemList = (
+    <section id="itemlist">
+      <div className="items">{items}</div>
+    </section>
+  )
 
   return (
     <main>
-      <section id="imgslide">
-        <div className="imgs">
-          <img src="/images/Eab45nOX0AAxAQm.jpeg" alt="PS5" />
-        </div>
-      </section>
-      <section id="itemlist">
-        <div className="items">
-          {itemList}
-        </div>
-      </section>
+      {imgslide}
+      {itemList}
     </main>
   );
 }

@@ -104,6 +104,13 @@ nav {
       text-align: center;
     }
   }
+  .seachbox {
+    width: 100%;
+    padding-right: 10px;
+    >input {
+      width: 100%;
+    }
+  }
 }
 
 #bottommenu {
@@ -188,6 +195,7 @@ main {
     @include flex(center, start, column);
     width: 100%;
     height: inherit;
+    padding: 0 10px;
     .item {
       @include flex(center, space-between);
       height: 100px;

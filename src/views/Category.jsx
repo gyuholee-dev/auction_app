@@ -4,18 +4,17 @@ import {
   Dimmer,
   SideMenu, 
   TopMenu,
-  // Main,
+  Main,
   BottomMenu,
 } from './components';
 
-export default function NotFound(props) {
-  
-  const { 
-    page = 'notfound',
-    title = `404 NOT FOUND`, 
-    message = `아직 안만들었습니다...` 
-  } = props;
+export default function Category(props) {
 
+  const {
+    page = 'category',
+    title = '검색결과',
+  } = props;
+  
   const [sideMenu, setSideMenu] = useState(false);
 
   function toggleMenu() {
@@ -24,20 +23,15 @@ export default function NotFound(props) {
   }
 
   return (
-    <div id="page-notfound">
+    <div id="page-home">
       <Dimmer dimm={sideMenu} toggle={toggleMenu}/>
       <SideMenu 
         sideMenu={sideMenu}
         toggleMenu={toggleMenu}
       />
       <TopMenu title={title} page={page} toggleMenu={toggleMenu}/>
-      <main>
-        <section id="notfound">
-          <p>{message}</p>
-          <img src="images/cording_cat.gif" />
-        </section>
-      </main>
+      <Main page={page}/>
       <BottomMenu />
     </div>
-  );
+  )
 }

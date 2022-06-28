@@ -11,7 +11,8 @@ import {
 export default function Home(props) {
 
   const {
-    title = `슈퍼레어`,
+    page = 'home',
+    title = '슈퍼레어',
   } = props;
   
   const [sideMenu, setSideMenu] = useState(false);
@@ -28,7 +29,7 @@ export default function Home(props) {
         sideMenu={sideMenu}
         toggleMenu={toggleMenu}
       />
-      <TopMenu title={title} path={'home'} toggleMenu={toggleMenu}/>
+      <TopMenu title={title} page={page} toggleMenu={toggleMenu}/>
       <Main />
       <BottomMenu />
     </div>
