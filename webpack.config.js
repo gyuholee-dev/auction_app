@@ -23,7 +23,6 @@ export default (env, argv) => {
         '!static-files*',
         '!images/**',
       ],
-      // cleanAfterEveryBuildPatterns: ['dist']
     }),
     new HtmlWebpackPlugin({
       minify: {
