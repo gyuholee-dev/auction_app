@@ -2,24 +2,22 @@ import React, { useEffect, useState } from 'react';
 
 import { 
   TopMenu,
-  CatMenu,
   Main,
 } from './components';
 
-export default function Category(props) {
+export default function Search(props) {
 
   const {
-    page = 'category',
+    page = 'search',
     title = '검색결과',
     query = null,
   } = props;
 
   return (
-    <div id="page-category">
+    <div id="page-search">
       <TopMenu 
         title={title} page={page} query={query}
       />
-      <CatMenu title={title} page={page}/>  
       <Main page={page}/>
     </div>
   )

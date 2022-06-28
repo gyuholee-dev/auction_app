@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
 const ImgSlide = (props)=> {
@@ -55,6 +56,46 @@ const ItemList = (props)=> {
   )
 }
 
+const BestQuery = (props) => {
+  return (
+    <section id="bestquery">
+      <ul className="items">
+        <li className="item active">
+          <Link to="/category">추천검색어</Link>
+        </li>
+        <li className="item">
+          <Link to="/category">추천검색어</Link>
+        </li>
+        <li className="item">
+          <Link to="/category">추천검색어</Link>
+        </li>
+        <li className="item">
+          <Link to="/category">추천검색어</Link>
+        </li>
+      </ul>
+    </section>
+  );
+}
+
+const SearchHistory = (props)=> {
+  return (
+    <section id="searchhistory">
+      <div class="header">
+       <span>최근 검색어</span>
+       <span>모두 지우기</span>
+      </div>
+      <table>
+        <tr>
+          <td>검색어</td>
+          <td>검색어</td>
+        </tr>
+      </table>
+    </section>
+  );
+}
+
+// ------------------------------------------------------------
+
 export default function Main(props) {
 
   const {
@@ -66,7 +107,9 @@ export default function Main(props) {
     <main>
       {page=='home'&&<ImgSlide />}
       {page=='category'&&<Condition />}
-      <ItemList />
+      {(page=='home'||page=='category')&&<ItemList />}
+      {page=='search'&&<BestQuery />}
+      {page=='search'&&<SearchHistory />}
     </main>
   );
 }

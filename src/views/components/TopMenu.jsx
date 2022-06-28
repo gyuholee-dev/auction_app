@@ -89,6 +89,7 @@ export default function TopMenu(props) {
   const CenterBlock = () => {
     switch (page) {
       case 'category':
+      case 'search':
         return (
           <div className="seachbox">
             <input type="text" name="search" placeholder="검색어를 입력하세요" />

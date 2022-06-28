@@ -9,7 +9,7 @@ export default function CatMenu(props) {
 
   return (
     <nav id="catmenu" className="menu top">
-      <ul className="list">
+      <ul className="items">
         <li className="item active">
           <Link to="/category">게임</Link>
         </li>
