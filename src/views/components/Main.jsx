@@ -1,15 +1,33 @@
 import React from 'react';
 
-export default function Main(props) {
 
-  const imgslide = (
+const ImgSlide = (props)=> {
+  return (
     <section id="imgslide">
       <div className="imgs">
         <img src="/images/Eab45nOX0AAxAQm.jpeg" alt="PS5" />
       </div>
     </section>
   );
+}
 
+const Condition = (props)=> {
+  return (
+    <section id="condition">
+      <select name="">
+        <option value="1">입찰수</option>
+      </select>
+      <select name="">
+        <option value="1">마감일</option>
+      </select>
+      <select name="">
+        <option value="1">직거래</option>
+      </select>
+    </section>
+  );
+}
+
+const ItemList = (props)=> {
   const count = 20;
   const items = [];
   for (let i = 0; i < count; i++) {
@@ -30,16 +48,25 @@ export default function Main(props) {
       </div>
     );
   }
-  const itemList = (
+  return (
     <section id="itemlist">
       <div className="items">{items}</div>
     </section>
   )
+}
+
+export default function Main(props) {
+
+  const {
+    page = 'home',
+    title = '슈퍼레어',
+  } = props;
 
   return (
     <main>
-      {imgslide}
-      {itemList}
+      {page=='home'&&<ImgSlide />}
+      {page=='category'&&<Condition />}
+      <ItemList />
     </main>
   );
 }

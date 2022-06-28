@@ -30,7 +30,7 @@ export default function Home(props) {
         toggleMenu={toggleMenu}
       />
       <TopMenu title={title} page={page} toggleMenu={toggleMenu}/>
-      <Main />
+      <Main page={page}/>
       <BottomMenu />
     </div>
   )

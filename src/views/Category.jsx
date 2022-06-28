@@ -4,6 +4,7 @@ import {
   Dimmer,
   SideMenu, 
   TopMenu,
+  CatMenu,
   Main,
   BottomMenu,
 } from './components';
@@ -23,15 +24,16 @@ export default function Category(props) {
   }
 
   return (
-    <div id="page-home">
+    <div id="page-category">
       <Dimmer dimm={sideMenu} toggle={toggleMenu}/>
       <SideMenu 
         sideMenu={sideMenu}
         toggleMenu={toggleMenu}
       />
       <TopMenu title={title} page={page} toggleMenu={toggleMenu}/>
+      <CatMenu title={title} page={page}/>  
       <Main page={page}/>
-      <BottomMenu />
+      {/* <BottomMenu /> */}
     </div>
   )
 }
