@@ -17,7 +17,6 @@
   top: 0;
   width: 100%;
   height: 100vh;
-  transition: all 150ms;
   overflow: hidden;
   // overflow-y: scroll;
 }
@@ -60,6 +59,10 @@ aside {
   transition: opacity 0.25s;
 }
 
+i {
+  top: 0.15rem;
+}
+
 // -----------------------------------------------------------------------------
 
 nav {
@@ -84,9 +87,6 @@ nav {
   border-bottom: 1px solid rgba(black, 0.35);
   button {
     flex-shrink: 0;
-  }
-  i {
-    top: 0.15rem;
   }
   &.hide {
     position: fixed;
@@ -224,17 +224,6 @@ main {
   }
 }
 
-#condition {
-  @include flex(center, space-between);
-  padding: 10px 15px;
-  select {
-    flex-grow: 1;
-    &:not(:last-child) {
-      margin-right: 15px;
-    }
-  }
-}
-
 #bestquery {
   position: relative;
   // height: 34px;
@@ -261,7 +250,54 @@ main {
   }
 }
 
+#searchhistory {
+  position: relative;
+  padding: 10px 15px;
+
+  .header {
+    @include flex(center, space-between);
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  a, .btn {
+    &:hover {
+      color: var(--color-text-link);
+    }
+  }
+
+  table {
+    width: 100%;
+    border-top: 2px solid var(--color-border);
+    border-bottom: 2px solid var(--color-border);
+    tr:not(:last-child) {
+      border-bottom: 1px solid var(--color-border);
+    }
+    td {
+      padding: 5px 10px;
+    }
+    button {
+      float: right;
+    }
+  }
+  
+}
+
 #itemlist {
+  
+  .order {
+    @include flex(center, space-between);
+    width: 100%;
+    padding: 10px 15px;
+    select {
+      flex-grow: 1;
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+    }
+  }
+
   .items {
     @include flex(center, start, column);
     width: 100%;

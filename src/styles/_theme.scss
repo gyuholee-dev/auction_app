@@ -122,7 +122,11 @@
 }
 
 #app-root {
-  background-color: var(--color-background-app);
+  // background-color: var(--color-background-app);
+  background-color: $black;
+  [id^=page-] {
+    background-color: var(--color-background-app);
+  }
 }
 
 body {

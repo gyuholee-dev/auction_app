@@ -75,7 +75,7 @@ export default function TopMenu(props) {
       case 'home':
         return <ButtonTopMenu type='menu' onClick={toggleMenu} />
       default:
-        return <ButtonTopMenu type='back' link={page=='notfound'&&'/'}/>
+        return <ButtonTopMenu type='back' link={'/'}/>
     }
   }
 
@@ -92,7 +92,7 @@ export default function TopMenu(props) {
       case 'search':
         return (
           <div className="seachbox">
-            <input type="text" name="search" placeholder="검색어를 입력하세요" />
+            <input type="text" name="search" placeholder="검색어를 입력하세요" autoComplete="off"/>
           </div>
         );
       default:

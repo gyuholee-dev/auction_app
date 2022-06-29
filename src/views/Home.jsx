@@ -23,7 +23,7 @@ export default function Home(props) {
   }
 
   return (
-    <div id="page-home">
+    <div id="page-home" className='fade'>
       <Dimmer dimm={sideMenu} toggle={toggleMenu}/>
       <SideMenu 
         sideMenu={sideMenu}

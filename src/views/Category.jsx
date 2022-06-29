@@ -15,7 +15,7 @@ export default function Category(props) {
   } = props;
 
   return (
-    <div id="page-category">
+    <div id="page-category" className='slide'>
       <TopMenu 
         title={title} page={page} query={query}
       />

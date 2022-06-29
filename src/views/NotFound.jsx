@@ -24,7 +24,7 @@ export default function NotFound(props) {
   }
 
   return (
-    <div id="page-notfound">
+    <div id="page-notfound" className='slide'>
       <Dimmer dimm={sideMenu} toggle={toggleMenu}/>
       <SideMenu 
         sideMenu={sideMenu}
