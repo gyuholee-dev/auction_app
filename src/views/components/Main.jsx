@@ -16,35 +16,26 @@ export default function Main(props) {
     title = '슈퍼레어',
   } = props;
 
-  // return (
-  //   <main>
-  //     {page=='home'&&<ImgSlide />}
-  //     {page=='category'&&<Condition />}
-  //     {(page=='home'||page=='category')&&<ItemList />}
-  //     {page=='search'&&<SearchHistory />}
-  //   </main>
-  // );
-  if (page=='home') {
-    return (
-      <main>
-        <ImgSlide />
-        <ItemList />
-      </main>
-    );
-  } else if (page=='category') {
-    return (
-      <main>
-        <ItemList order={true}/>
-      </main>
-    ); 
-  } else if (page=='search') {
-    return (
-      <main>
-        <Routes>
-          <Route path=":query" element={<ItemList order={true}/>} />
-          <Route path="*" element={<SearchHistory />} />
-        </Routes>
-      </main>
-    );
+
+  switch (page) {
+    case 'home':
+      return (
+        <main>
+          <ImgSlide />
+          <ItemList />
+        </main>
+      )
+    case 'search':
+      return (
+        <main>
+          <SearchHistory />
+        </main>
+      )
+    case 'searchResult':
+      return (
+        <main>
+          <ItemList order={true} />
+        </main>
+      )
   }
 }

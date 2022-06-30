@@ -3,6 +3,10 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
+import { Provider } from "react-redux";
+import { configureStore } from '@reduxjs/toolkit';
+import { rootReducer } from './states';
+
 import Home from './views/Home';
 import Category from './views/Category';
 import Search from './views/Search';
@@ -62,9 +66,22 @@ function App() {
   );
 }
 
+const store = configureStore({
+  reducer: rootReducer
+});
+
+console.log(store.getState());
+const listener = () => {
+  const state = store.getState();
+  console.log(state);
+};
+store.subscribe(listener);
+
 const root = createRoot(document.getElementById('app-root'));
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );

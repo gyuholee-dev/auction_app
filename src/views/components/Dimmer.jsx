@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { timeout } from '/common/functions';
+import { timeout } from '/src/utils/functions';
 
 export default function Dimmer(props) {
 

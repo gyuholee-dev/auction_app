@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Order = (props)=> {
+const Order = (props) => {
   return (
     <div className="order">
       <select name="">

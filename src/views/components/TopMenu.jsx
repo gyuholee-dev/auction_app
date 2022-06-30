@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useStore, useSelector, useDispatch } from 'react-redux';
+import { toggleSideMenu } from '/src/states';
 
 import cn from 'classnames';
 // import { useScroll } from '../customhooks';
@@ -46,6 +48,14 @@ export default function TopMenu(props) {
     toggleMenu 
   } = props;
 
+  // const state = useStore().getState();
+  // const { sideMenu } = useSelector(state => ({
+  //   sideMenu: state.UI.sideMenu,
+  // }));
+
+  const dispatch = useDispatch();
+  const toggle = () => dispatch(toggleSideMenu());
+
   // const location = useLocation();
   // const { pathname } = location;
   // const path = pathname.split('/')[1] || 'home';
@@ -73,7 +83,7 @@ export default function TopMenu(props) {
   const ButtonLeft = () => {
     switch (page) {
       case 'home':
-        return <ButtonTopMenu type='menu' onClick={toggleMenu} />
+        return <ButtonTopMenu type='menu' onClick={toggle} />
       default:
         return <ButtonTopMenu type='back' link={'/'}/>
     }
