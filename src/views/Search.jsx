@@ -16,9 +16,7 @@ export default function Search(props) {
 
   return (
     <div id="page-search" className='slide'>
-      <TopMenu 
-        title={title} page={page} query={query}
-      />
+      <TopMenu title={title} page={page} query={query}/>
       <Main page={page}/>
     </div>
   )

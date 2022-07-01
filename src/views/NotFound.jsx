@@ -25,19 +25,13 @@ export default function NotFound(props) {
 
   return (
     <div id="page-notfound" className='slide'>
-      <Dimmer dimm={sideMenu} toggle={toggleMenu}/>
-      <SideMenu 
-        sideMenu={sideMenu}
-        toggleMenu={toggleMenu}
-      />
-      <TopMenu title={title} page={page} toggleMenu={toggleMenu}/>
+      <TopMenu title={title} page={page}/>
       <main>
         <section id="notfound">
           <p>{message}</p>
           <img src="images/cording_cat.gif" />
         </section>
       </main>
-      <BottomMenu />
     </div>
   );
 }

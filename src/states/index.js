@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import sideMenu from './sideMenu.js';
+
+import sideMenu, { toggleSideMenu } from './sideMenu.js';
+import dimmer, { toggleDimmer } from './dimmer.js';
 
 export const rootReducer = combineReducers({
-  sideMenu
+  sideMenu, dimmer
 });
-
-export { 
-  toggleSideMenu 
-} from './sideMenu.js';
+export {
+  toggleSideMenu, toggleDimmer
+}

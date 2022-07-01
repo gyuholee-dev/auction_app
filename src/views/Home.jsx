@@ -24,12 +24,9 @@ export default function Home(props) {
 
   return (
     <div id="page-home" className='fade'>
-      <Dimmer dimm={sideMenu} toggle={toggleMenu}/>
-      <SideMenu 
-        sideMenu={sideMenu}
-        toggleMenu={toggleMenu}
-      />
-      <TopMenu title={title} page={page} toggleMenu={toggleMenu}/>
+      <Dimmer />
+      <SideMenu />
+      <TopMenu title={title} page={page}/>
       <Main page={page}/>
       <BottomMenu />
     </div>

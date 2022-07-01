@@ -5,7 +5,6 @@ import path from 'path';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-// import RefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 export default (env, argv) => {
   const watch = (env && env.WEBPACK_WATCH) ? (env.WEBPACK_WATCH === 'true') : false; // true | false
@@ -38,9 +37,6 @@ export default (env, argv) => {
     plugins.push(new MiniCssExtractPlugin({
       filename: 'styles/style.min.css',
     }));
-  } else {
-    // plugins.push(new RefreshWebpackPlugin());
-    // babelPlugins.push('react-refresh/babel');
   }
   const styleLoader = (mode === 'production') ? MiniCssExtractPlugin.loader : 'style-loader';
 

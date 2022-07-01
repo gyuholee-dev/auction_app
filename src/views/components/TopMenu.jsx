@@ -6,7 +6,6 @@ import { toggleSideMenu } from '/src/states';
 import cn from 'classnames';
 // import { useScroll } from '../customhooks';
 
-
 const ButtonTopMenu = (props) => {
   const {
     type = 'menu',
@@ -44,22 +43,8 @@ export default function TopMenu(props) {
 
   const { 
     title = '슈퍼레어', 
-    page = null,
-    toggleMenu 
+    page = null
   } = props;
-
-  // const state = useStore().getState();
-  // const { sideMenu } = useSelector(state => ({
-  //   sideMenu: state.UI.sideMenu,
-  // }));
-
-  const dispatch = useDispatch();
-  const toggle = () => dispatch(toggleSideMenu());
-
-  // const location = useLocation();
-  // const { pathname } = location;
-  // const path = pathname.split('/')[1] || 'home';
-
 
   // const [menuClass, setMenuClass] = useState('menu top');
   // const { scrollY, scrollDirection } = useScroll();
@@ -80,10 +65,15 @@ export default function TopMenu(props) {
   //   setClass();
   // });
 
+  const dispatch = useDispatch();
+  function toggleMenu() {
+    dispatch(toggleSideMenu());
+  }
+
   const ButtonLeft = () => {
     switch (page) {
       case 'home':
-        return <ButtonTopMenu type='menu' onClick={toggle} />
+        return <ButtonTopMenu type='menu' onClick={toggleMenu} />
       default:
         return <ButtonTopMenu type='back' link={'/'}/>
     }

@@ -6,6 +6,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Provider } from "react-redux";
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './states';
+import ReduxThunk from 'redux-thunk';
 
 import Home from './views/Home';
 import Category from './views/Category';
@@ -67,15 +68,16 @@ function App() {
 }
 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
+  middleware: [ReduxThunk]
 });
 
-console.log(store.getState());
-const listener = () => {
-  const state = store.getState();
-  console.log(state);
-};
-store.subscribe(listener);
+// console.log(store.getState());
+// const listener = () => {
+//   const state = store.getState();
+//   console.log(state);
+// };
+// store.subscribe(listener);
 
 const root = createRoot(document.getElementById('app-root'));
 root.render(

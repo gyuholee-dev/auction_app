@@ -31,7 +31,7 @@ export default function Main(props) {
           <SearchHistory />
         </main>
       )
-    case 'searchResult':
+    case 'category':
       return (
         <main>
           <ItemList order={true} />
