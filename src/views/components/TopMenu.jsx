@@ -43,7 +43,9 @@ export default function TopMenu(props) {
 
   const { 
     title = '슈퍼레어', 
-    page = null
+    page = null,
+    category = null,
+    query = null,
   } = props;
 
   // const [menuClass, setMenuClass] = useState('menu top');
@@ -92,7 +94,7 @@ export default function TopMenu(props) {
       case 'search':
         return (
           <div className="seachbox">
-            <input type="text" name="search" placeholder="검색어를 입력하세요" autoComplete="off"/>
+            <input type="text" name="search" placeholder="검색어를 입력하세요" autoComplete="off" defaultValue={query}/>
           </div>
         );
       default:

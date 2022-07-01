@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useStore, useSelector, useDispatch } from 'react-redux';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -7,6 +8,8 @@ import { Provider } from "react-redux";
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './states';
 import ReduxThunk from 'redux-thunk';
+
+import { setTitle, setPage, setStack } from './states';
 
 import Home from './views/Home';
 import Category from './views/Category';
@@ -20,22 +23,29 @@ import './styles/style.scss';
 
 function App() {
 
-  const [ stack, setStack ] = useState([]);
-
+  const appState = useSelector(state => state.app);
+  const title = appState.title;
+  const page = appState.page;
+  const stack = appState.stack;
+  
   const location = useLocation();
   const { pathname } = location;
-  // const path = pathname.split('/')[1]??'home';
 
   function getPath() {
     return window.location.pathname;
   }
 
-  function pushStack(path) {
-    if (getPath() == '/') { 
-      setStack([path]); 
+  const dispatch = useDispatch();
+  function pushStack(pathname) {
+    if (pathname == '/') { 
+      dispatch(setStack([pathname])); 
     } else {
-      setStack([...stack, path]);
+      dispatch(setStack([...stack, pathname]));
     }
+  }
+
+  function setTransition(elem, className) {
+    elem.className = className;
   }
 
   useEffect(() => {
@@ -46,8 +56,12 @@ function App() {
     key: pathname,
     classNames: "anim",
     timeout: { enter: 350, exit: 350 },
-    onExit: () => {
-      // console.log('onExit', stack);
+    onExit: (elem) => {
+      const lastStack = stack.at(-1);
+      const incomePath = '/' + getPath().split('/')[1];
+      if (lastStack === incomePath) {
+        setTransition(elem, 'fade');
+      }
     }
   }
 
@@ -58,7 +72,11 @@ function App() {
       <CSSTransition {...transitionProps}>
         <Routes location={location}>
           <Route path="/" element={<Home />} />
-          <Route path="/search/*" element={<Search />} />
+          <Route path="/search/*" element={<Search />}>
+            <Route path=":query" element={<Search />} />
+            <Route path=":category/:query" element={<Search />} />
+            <Route path="" element={<Search />} />
+          </Route>
           <Route path="/category" element={<Category />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
