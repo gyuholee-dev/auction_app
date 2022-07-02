@@ -10,7 +10,8 @@
     "start": "nodemon app.js",
     "serve": "webpack serve",
     "watch": "webpack --watch --mode=development",
-    "build": "webpack --mode=production",
+    "build-dev": "webpack --mode=development",
+    "build-prod": "webpack --mode=production",
     "build-all": "webpack --mode=development && webpack --mode=production"
   },
   "nodemonConfig": {
