@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useStore, useSelector, useDispatch } from 'react-redux';
 import { toggleSideMenu, toggleDimmer } from '/src/states';
-import { timeout } from '/src/utils/functions';
 
 export default function Dimmer(props) {
 

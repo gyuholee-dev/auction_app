@@ -3,42 +3,10 @@
   position: relative;
 }
 
-[id^=page-] {
-  transition: all 350ms;
-  z-index: 1;
-}
-
-
-// 마운트 전
-.anim-enter {
-  // opacity: 0;
-  transform: translateX(100%);
-  z-index: 2;
-}
-
-// 마운트 활성화
-.anim-enter-active {
-  // opacity: 1;
-  transform: translateX(0);
-  z-index: 2;
-}
-
-// 언마운트 전
-.anim-exit {
-  // opacity: 1;
-  filter: brightness(1);
-  // transform: translateX(0);
-}
-
-// 언마운트 활성화
-.anim-exit-active {
-  // opacity: 0.25;
-  filter: brightness(0.25);
-  transform: scale(0.9);
-  // transform: translateX(-100%);
-}
+$transition-page: all 350ms;
 
 .fade {
+  // z-index: 1;
   // 마운트 전
   &.anim-enter {
     filter: brightness(0.25);
@@ -49,6 +17,7 @@
   &.anim-enter-active {
     filter: brightness(1);
     transform: scale(1);
+    transition: $transition-page;
   }
 
   // 언마운트 전
@@ -61,6 +30,7 @@
   &.anim-exit-active {
     filter: brightness(0.25);
     transform: scale(0.9);
+    transition: $transition-page;
   }
 }
 
@@ -74,6 +44,7 @@
   // 마운트 활성화
   &.anim-enter-active {
     transform: translateX(0);
+    transition: $transition-page;
   }
 
   // 언마운트 전
@@ -84,5 +55,6 @@
   // 언마운트 활성화
   &.anim-exit-active {
     transform: translateX(100%);
+    transition: $transition-page;
   }
 }

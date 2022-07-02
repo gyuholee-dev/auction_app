@@ -13,7 +13,7 @@ export default function BottomMenu(props) {
         <span>홈</span>
       </button>
       <button className="btn none"
-        onClick={() => navigate('/category')}>
+        onClick={() => navigate('/search/games')}>
         <i className="xi-document"></i>
         <span>카테고리</span>
       </button>

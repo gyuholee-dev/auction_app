@@ -6,16 +6,16 @@ const BestQuery = (props) => {
     <section id="bestquery">
       <ul className="items">
         <li className="item active">
-          <Link to="/search/추천검색어">추천검색어</Link>
+          <Link to="/search/all/추천검색어">추천검색어</Link>
         </li>
         <li className="item">
-          <Link to="/category">추천검색어</Link>
+          <Link to="/search/all/추천검색어">추천검색어</Link>
         </li>
         <li className="item">
-          <Link to="/category">추천검색어</Link>
+          <Link to="/search/all/추천검색어">추천검색어</Link>
         </li>
         <li className="item">
-          <Link to="/category">추천검색어</Link>
+          <Link to="/search/all/추천검색어">추천검색어</Link>
         </li>
       </ul>
     </section>
@@ -30,11 +30,11 @@ const History = (props)=> {
     items.push(
       <tr key={i}>
         <td>
-          <Link to="/category">검색어</Link>
+          <Link to="/search/all/검색어">검색어</Link>
           <button className='btn none inline'><i className='xi-close-thin'></i></button>
         </td>
         <td>
-          <Link to="/category">검색어</Link>
+          <Link to="/search/all/검색어">검색어</Link>
           <button className='btn none inline'><i className='xi-close-thin'></i></button>
         </td>
       </tr>

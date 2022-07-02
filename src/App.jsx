@@ -12,7 +12,6 @@ import ReduxThunk from 'redux-thunk';
 import { setTitle, setPage, setStack } from './states';
 
 import Home from './views/Home';
-import Category from './views/Category';
 import Search from './views/Search';
 import NotFound from './views/NotFound';
 
@@ -29,7 +28,8 @@ function App() {
   const stack = appState.stack;
   
   const location = useLocation();
-  const { pathname } = location;
+  let { pathname } = location;
+  pathname = '/' + pathname.split('/')[1];
 
   function getPath() {
     return window.location.pathname;
@@ -59,6 +59,7 @@ function App() {
     onExit: (elem) => {
       const lastStack = stack.at(-1);
       const incomePath = '/' + getPath().split('/')[1];
+      // console.log(lastStack, ':', incomePath);
       if (lastStack === incomePath) {
         setTransition(elem, 'fade');
       }
@@ -73,11 +74,10 @@ function App() {
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/search/*" element={<Search />}>
-            <Route path=":query" element={<Search />} />
+            <Route path=":category" element={<Search />} />
             <Route path=":category/:query" element={<Search />} />
             <Route path="" element={<Search />} />
           </Route>
-          <Route path="/category" element={<Category />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </CSSTransition>
