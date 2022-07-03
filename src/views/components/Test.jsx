@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useStore, useSelector, useDispatch } from 'react-redux';
+// import { useStore, useSelector, useDispatch } from 'react-redux';
 
 // ------------------------------------------------------------
 
@@ -37,30 +37,52 @@ import { useStore, useSelector, useDispatch } from 'react-redux';
 
 // ------------------------------------------------------------
 
+// export const Test = {
+//   state: {
+//     text: 'ready',
+//   },
+//   reducer: (state = Test.state, action) => {
+//     switch (action.type) {
+//       case 'SET_TEXT':
+//         return {
+//           ...state,
+//           text: action.value,
+//         }
+//       default:
+//         return state;
+//     }
+//   },
+//   testAction: (value) => {
+//     return async (dispatch, getState) => {
+//       const { text } = getState();
+//       dispatch({ type: 'SET_TEXT', value: value });
+//     }
+//   },
+//   elem: () => {
+//     const { text } = useSelector(state => state.test);
+//     return (
+//       <div>
+//         <h1>{text}</h1>
+//       </div>
+//     )
+//   }
+// }
+
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+
 export const Test = {
-  state: {
-    text: 'ready',
-  },
-  reducer: (state = Test.state, action) => {
-    switch (action.type) {
-      case 'SET_TEXT':
-        return {
-          ...state,
-          text: action.value,
-        }
-      default:
-        return state;
-    }
-  },
-  testAction: (value) => {
-    return async (dispatch, getState) => {
-      const { text } = getState();
-      dispatch({ type: 'SET_TEXT', value: value });
-    }
-  },
-  
+  state: atom({
+    key: 'text',
+    default: 'ready',
+  }),
   elem: () => {
-    const { text } = useSelector(state => state.test);
+    const [text, setText] = useRecoilState(Test.state);
     return (
       <div>
         <h1>{text}</h1>
