@@ -12,7 +12,7 @@ export default (env, argv) => {
   const filename = (mode === 'production') ? 'scripts/bundle.min.js' : 'scripts/bundle.js';
   const distDir = path.resolve('public');
 
-  const entry = ['./src/TestApp'];
+  const entry = ['./src/App'];
 
   const babelPlugins = [];
   const plugins = [
@@ -118,7 +118,10 @@ export default (env, argv) => {
     },
     target: 'web',
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx'],
+      alias: {
+        '@': path.resolve('/src'),
+      }
     },
     output: {
       path: distDir,

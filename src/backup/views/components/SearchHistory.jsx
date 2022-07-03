@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-const BestQuery = () => {
+const BestQuery = (props) => {
   return (
     <section id="bestquery">
       <ul className="items">
@@ -22,7 +22,7 @@ const BestQuery = () => {
   );
 }
 
-const History = ()=> {
+const History = (props)=> {
 
   const count = 10;
   const items = [];
@@ -57,13 +57,11 @@ const History = ()=> {
   );
 }
 
-export const SearchHistory = {
-  elem : (props) => {
-    return (
-      <>
-        <BestQuery />
-        <History />
-      </>
-    )
-  }
+export default function SearchHistory(props) {
+  return (
+    <>
+      <BestQuery />
+      <History />
+    </>
+  );
 }

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useStore, useSelector, useDispatch } from 'react-redux';
-import { toggleSideMenu } from '/src/states';
 
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+import { App } from '/src/App';
+import { SideMenu, toggleSideMenu } from './SideMenu';
 import cn from 'classnames';
-// import { useScroll } from '../customhooks';
 
 const ButtonTopMenu = (props) => {
   const {
@@ -39,74 +44,60 @@ const ButtonTopMenu = (props) => {
 }
 
 
-export default function TopMenu(props) {
+export const TopMenu = {
 
-  const { 
-    title = '슈퍼레어', 
-    page = null,
-    category = null,
-    query = null,
-  } = props;
+  elem: (props) => {
+    const { 
+      category = null,
+      query = null,
+    } = props;
 
-  // const [menuClass, setMenuClass] = useState('menu top');
-  // const { scrollY, scrollDirection } = useScroll();
+    const appState = useRecoilValue(App.state);
+    const title = appState.title;
+    const page = appState.page;
 
-  // function setClass() {
-  //   if (scrollDirection === 'up') {
-  //     if (scrollY < 56) {
-  //       setMenuClass('menu top');
-  //     } else {
-  //       setMenuClass('menu top hide');
-  //     }
-  //   } else if (scrollDirection === 'down') {
-  //     setMenuClass('menu top show');
-  //   }
-  // }
+    // const [ sideMenu, setSideMenu ] = useRecoilState(SideMenu.state);
 
-  // useEffect(() => {
-  //   setClass();
-  // });
+    // function toggleSideMenu() {
+    //   setSideMenu();
+    // }
 
-  const dispatch = useDispatch();
-  function toggleMenu() {
-    dispatch(toggleSideMenu());
-  }
-
-  const ButtonLeft = () => {
-    switch (page) {
-      case 'home':
-        return <ButtonTopMenu type='menu' onClick={toggleMenu} />
-      default:
-        return <ButtonTopMenu type='back' link={'/'}/>
+    const ButtonLeft = () => {
+      switch (page) {
+        case 'home':
+          return <ButtonTopMenu type='menu' onClick={toggleSideMenu} />
+        default:
+          return <ButtonTopMenu type='back' link={'/'}/>
+      }
     }
-  }
 
-  const ButtonRight = () => {
-    switch (page) {
-      case 'home':
-        return <ButtonTopMenu type='search' />
+    const ButtonRight = () => {
+      switch (page) {
+        case 'home':
+          return <ButtonTopMenu type='search' />
+      }
     }
-  }
 
-  const CenterBlock = () => {
-    switch (page) {
-      case 'category':
-      case 'search':
-        return (
-          <div className="seachbox">
-            <input type="text" name="search" placeholder="검색어를 입력하세요" autoComplete="off" defaultValue={query}/>
-          </div>
-        );
-      default:
-        return <div className={cn('title', {'center':page=='home'})}>{title}</div>
+    const CenterBlock = () => {
+      switch (page) {
+        case 'category':
+        case 'search':
+          return (
+            <div className="seachbox">
+              <input type="text" name="search" placeholder="검색어를 입력하세요" autoComplete="off" defaultValue={query}/>
+            </div>
+          );
+        default:
+          return <div className={cn('title', {'center':page=='home'})}>{title}</div>
+      }
     }
-  }
 
-  return (
-    <nav id="topmenu" className="menu top">
-      <ButtonLeft />
-      <CenterBlock />
-      <ButtonRight />
-    </nav>
-  );
+    return (
+      <nav id="topmenu" className="menu top">
+        <ButtonLeft />
+        <CenterBlock />
+        <ButtonRight />
+      </nav>
+    )
+  }
 }
