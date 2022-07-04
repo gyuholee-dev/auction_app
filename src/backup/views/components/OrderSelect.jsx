@@ -1,4 +1,4 @@
-export default function OrderSelect() {
+export function OrderSelect() {
   return (
     <div className="order">
       <select name="">

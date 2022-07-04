@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import {
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
-
 import { 
   Dimmer,
   SideMenu, 
@@ -16,27 +9,28 @@ import {
   BottomMenu,
 } from './components';
 
-import { App } from '../App';
+export default function Home(props) {
 
-export const Home = {
-  elem: () => {
-    const [ app, setApp ] = useRecoilState(App.state);
+  const {
+    page = 'home',
+    pageId = 'page-home',
+    title = '슈퍼레어',
+  } = props;
 
-    return (
-      <div id='page-home' className='fade'>
-        <Dimmer.elem />
-        <SideMenu.elem />
-        <header>
-          <TopMenu.elem />
-        </header>
-        <main>
-          <ImgSlide.elem />
-          <ItemList.elem />
-        </main>
-        <footer>
-          <BottomMenu.elem />
-        </footer>
-      </div>
-    ) 
-  }
+  return (
+    <div id={pageId} className='fade'>
+      <Dimmer />
+      <SideMenu />
+      <header>
+        <TopMenu title={title} page={page}/>
+      </header>
+      <main>
+        <ImgSlide />
+        <ItemList />
+      </main>
+      <footer>
+        <BottomMenu />
+      </footer>
+    </div>
+  )
 }

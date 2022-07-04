@@ -1,30 +1,42 @@
 import React from 'react';
-import { useStore, useSelector, useDispatch } from 'react-redux';
-import { toggleSideMenu } from '/src/states';
 
-export default function SideMenu(props) {
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 
-  // const {sideMenu, toggleMenu} = props;
-  // const menuClass = sideMenu?'open':'close';
+export function toggleSideMenu() {
+  const [sideMenu, setSideMenu] = useRecoilState(SideMenu.state);
+  setSideMenu({...sideMenu, open: !sideMenu.open});
+}
 
-  const sideMenu = useSelector(state => state.sideMenu);
-  const menuClass = sideMenu.open?'open':'close';
-
-  const dispatch = useDispatch();
-  function toggleMenu() {
-    dispatch(toggleSideMenu());
+export const SideMenu = {
+  state: atom({
+    key: 'sideMenuState',
+    default: {
+      open: false,
+    }
+  }),
+  toggle: () => {
+    const [sideMenu, setSideMenu] = useRecoilState(SideMenu.state);
+    setSideMenu({...sideMenu, open: !sideMenu.open});
+  },
+  elem: () => {
+    const sideMenu = useRecoilValue(SideMenu.state);
+    const menuClass = sideMenu.open?'open':'close';
+    return (
+      <aside>
+        <nav id="sidemenu" className={menuClass}>
+          <div className="header">
+            <div className="user"></div>
+            <button className="btn none close" onClick={SideMenu.toggle}>
+              <i className="xi-close"></i>
+            </button>
+          </div>
+        </nav>
+      </aside>
+    )
   }
-
-  return (
-    <aside>
-      <nav id="sidemenu" className={menuClass}>
-        <div className="header">
-          <div className="user"></div>
-          <button className="btn none close" onClick={toggleMenu}>
-            <i className="xi-close"></i>
-          </button>
-        </div>
-      </nav>
-    </aside>
-  );
 }
