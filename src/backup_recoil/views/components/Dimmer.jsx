@@ -18,9 +18,8 @@ export const Dimmer = {
       className: 'dimm',
     },
   }),
-  toggleDimmer: async () => {
-    const [dimmer, setDimmer] = useRecoilState(Dimmer.state);
-    setDimmer({...dimmer, show: !dimmerState.show});
+  toggleDimmer: async (dimmer, setDimmer) => {
+    setDimmer({...dimmer, show: !dimmer.show});
     if (dimmer.show === true) {
       setDimmer({...dimmer, className: 'dimm show'});
       await timeout(50);
@@ -33,11 +32,11 @@ export const Dimmer = {
   },
   elem: () => {
     const sideMenu = useRecoilValue(SideMenu.state);
-    const dimmer = useRecoilValue(Dimmer.state);
+    const [dimmer, setDimmer] = useRecoilState(Dimmer.state);
   
     useEffect(() => {
       if (sideMenu.open === dimmer.show) return;
-      Dimmer.toggleDimmer();
+      Dimmer.toggleDimmer(dimmer, setDimmer);
     }, [sideMenu.open]);
   
     return (

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { timeout } from '/src/utils/functions';
 
 import {
   atom,
@@ -8,7 +9,7 @@ import {
   useRecoilValue,
 } from 'recoil';
 import { App } from '/src/App';
-import { SideMenu, toggleSideMenu } from './SideMenu';
+import { SideMenu } from './SideMenu';
 import cn from 'classnames';
 
 const ButtonTopMenu = (props) => {
@@ -45,7 +46,9 @@ const ButtonTopMenu = (props) => {
 
 
 export const TopMenu = {
-
+  toggle: async(sideMenu, setSideMenu) => {
+    setSideMenu({...sideMenu, open: !sideMenu.open});
+  },
   elem: (props) => {
     const { 
       category = null,
@@ -56,11 +59,11 @@ export const TopMenu = {
     const title = appState.title;
     const page = appState.page;
 
-    // const [ sideMenu, setSideMenu ] = useRecoilState(SideMenu.state);
+    const [ sideMenu, setSideMenu ] = useRecoilState(SideMenu.state);
 
-    // function toggleSideMenu() {
-    //   setSideMenu();
-    // }
+    function toggleSideMenu() {
+      TopMenu.toggle(sideMenu, setSideMenu);
+    }
 
     const ButtonLeft = () => {
       switch (page) {

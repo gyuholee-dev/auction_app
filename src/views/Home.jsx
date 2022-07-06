@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { createSlice } from '@reduxjs/toolkit';
+import { useStore, useSelector, useDispatch } from 'react-redux';
 
+import { App } from '@app';
 import { 
   Dimmer,
   SideMenu, 
@@ -9,28 +12,44 @@ import {
   BottomMenu,
 } from './components';
 
-export default function Home(props) {
+const store = createSlice({
+  name: 'home',
+  initialState : {},
+  reducers: {}
+});
 
-  const {
-    page = 'home',
-    pageId = 'page-home',
-    title = '슈퍼레어',
-  } = props;
+export const Home = {
+  actions: store.actions,
+  reducer: store.reducer,
+  getState : () => {
+    return useSelector(state => state.home);
+  },
+  elem: (props) => {
+    const { page = 'home', title = '슈퍼레어' } = props;
+    const { setPage, setTitle } = App.actions;
 
-  return (
-    <div id={pageId} className='fade'>
-      <Dimmer />
-      <SideMenu />
-      <header>
-        <TopMenu title={title} page={page}/>
-      </header>
-      <main>
-        <ImgSlide />
-        <ItemList />
-      </main>
-      <footer>
-        <BottomMenu />
-      </footer>
-    </div>
-  )
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(setPage(page));
+      dispatch(setTitle(title));
+    }, []);
+
+    return (
+      <div id={`page-${page}`} className='fade'>
+        <Dimmer.elem />
+        <SideMenu.elem />
+        <header>
+          <TopMenu.elem title={title} page={page}/>
+        </header>
+        <main>
+          <ImgSlide.elem />
+          <ItemList.elem />
+        </main>
+        <footer>
+          <BottomMenu.elem />
+        </footer>
+      </div>
+    )
+  }
 }

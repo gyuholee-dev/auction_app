@@ -1,27 +1,57 @@
 import React, { useEffect, useState } from 'react';
+import { createSlice } from '@reduxjs/toolkit';
 import { useStore, useSelector, useDispatch } from 'react-redux';
-import { toggleSideMenu, toggleDimmer } from '/src/states';
+import { SideMenu } from './SideMenu';
+import { timeout } from '/src/utils/functions.js';
 
-export default function Dimmer(props) {
-
-  const sideMenu = useSelector(state => state.sideMenu);
-  const dimmer = useSelector(state => state.dimmer);
-  const dimmClass = dimmer.className;
-
-  const dispatch = useDispatch();
-  function toggleMenu() {
-    dispatch(toggleSideMenu());
+const store = createSlice({
+  name: 'dimmer',
+  initialState : {
+    show: false,
+    className: 'dimm',
+  },
+  reducers: {
+    setShow: (state, action) => { state.show = action.payload },
+    toggleShow: (state, action) => { state.show = !state.show },
+    setClass: (state, action) => { state.className = action.payload },
   }
-  function setDimmer() {
-    dispatch(toggleDimmer());
+});
+
+export const Dimmer = {
+  actions: store.actions,
+  reducer: store.reducer,
+  getState : () => {
+    return useSelector(state => state.dimmer);
+  },
+  toggle: () => {
+    return async(dispatch, getState) => {
+      const { toggleShow, setClass } = Dimmer.actions;
+      dispatch(toggleShow());
+      const { dimmer } = getState();
+      if (dimmer.show === true) {
+        dispatch(setClass('dimm show'));
+        await timeout(50);
+        dispatch(setClass('dimm show active'));
+      } else {
+        dispatch(setClass('dimm show'));
+        await timeout(250);
+        dispatch(setClass('dimm'));
+      }
+    }
+  },
+  elem: () => {
+    const dispatch = useDispatch();
+    const sideMenu = SideMenu.getState();
+    const state = Dimmer.getState();
+
+    useEffect(() => {
+      if (sideMenu.open === state.show) return;
+      dispatch(Dimmer.toggle());
+    }, [sideMenu.open]);
+
+    return (
+      <div className={state.className} onClick={()=>dispatch(SideMenu.toggle())}></div>
+    )
   }
-
-  useEffect(() => {
-    if (sideMenu.open === dimmer.show) return;
-    setDimmer();
-  }, [sideMenu.open]);
-
-  return (
-    <div className={dimmClass} onClick={toggleMenu}></div>
-  );
 }
+Object.assign(Dimmer, Dimmer.actions);

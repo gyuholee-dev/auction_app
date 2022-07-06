@@ -1,7 +1,5 @@
-import React from 'react';
-import { createSlice } from '@reduxjs/toolkit';
-import { useStore, useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const BestQuery = (props) => {
   return (
@@ -59,24 +57,11 @@ const History = (props)=> {
   );
 }
 
-
-const store = createSlice({
-  name: 'searchHistory',
-  initialState : {},
-  reducers: {}
-});
-
-export const SearchHistory = {
-  reducer: store.reducer,
-  getState : () => {
-    return useSelector(state => state.searchHistory);
-  },
-  elem: (props) => {
-    return (
-      <>
-        <BestQuery />
-        <History />
-      </>
-    );
-  }
+export default function SearchHistory(props) {
+  return (
+    <>
+      <BestQuery />
+      <History />
+    </>
+  );
 }
