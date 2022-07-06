@@ -53,7 +53,7 @@ export default (env, argv) => {
       hot: true,
       liveReload: true,
       compress: true,
-      port: 9000,
+      port: 8000,
       // static: false,
       historyApiFallback: true,
       static: { 
@@ -123,7 +123,7 @@ export default (env, argv) => {
         '@app': path.resolve('src/App'),
         '@views': path.resolve('src/views'),
         '@components': path.resolve('src/views/components'),
-        '@containners': path.resolve('src/views/containners'),
+        '@containers': path.resolve('src/views/containers'),
         '@pages': path.resolve('src/views/pages'),
         '@utils': path.resolve('src/utils'),
         '@styles': path.resolve('src/styles'),

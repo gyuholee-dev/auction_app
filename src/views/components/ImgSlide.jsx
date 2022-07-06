@@ -7,7 +7,12 @@ const store = createSlice({
   reducers: {}
 });
 
+const actions = {
+  ...store.actions,
+}
+
 export const ImgSlide = {
+  actions: actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.imgSlide);

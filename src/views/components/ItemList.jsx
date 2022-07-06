@@ -2,21 +2,7 @@ import React from 'react';
 import { createSlice } from '@reduxjs/toolkit';
 import { useStore, useSelector, useDispatch } from 'react-redux';
 
-const Order = (props) => {
-  return (
-    <div className="order">
-      <select name="">
-        <option value="1">입찰수</option>
-      </select>
-      <select name="">
-        <option value="1">마감일</option>
-      </select>
-      <select name="">
-        <option value="1">직거래</option>
-      </select>
-    </div>
-  );
-}
+import { OrderSelect } from './OrderSelect';
 
 const store = createSlice({
   name: 'itemList',
@@ -24,7 +10,12 @@ const store = createSlice({
   reducers: {}
 });
 
+const actions = {
+  ...store.actions,
+}
+
 export const ItemList = {
+  actions: actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.itemList);
@@ -53,7 +44,7 @@ export const ItemList = {
     }
     return (
       <section id="itemlist">
-        {order && <Order />}
+        {order && <OrderSelect.elem />}
         <div className="items">{items}</div>
       </section>
     )

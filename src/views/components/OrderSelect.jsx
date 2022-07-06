@@ -8,7 +8,12 @@ const store = createSlice({
   reducers: {}
 });
 
+const actions = {
+  ...store.actions,
+}
+
 export const OrderSelect = {
+  actions: actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.orderSelect);

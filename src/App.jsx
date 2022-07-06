@@ -7,11 +7,12 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { combineReducers } from 'redux';
 import { Provider } from "react-redux";
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { reducers } from '@components';
 
-import { Home } from './views/Home';
-import { Search } from './views/Search';
-import { NotFound } from './views/NotFound';
+import { reducers as compReducers } from '@components';
+import { reducers as contReducers } from '@containers';
+import { reducers as pageReducers } from '@pages';
+
+import { Home, Search, NotFound } from '@pages';
 
 // scss
 import './styles/style.scss';
@@ -23,17 +24,23 @@ const store = createSlice({
   initialState : {
     page: 'home',
     title: '슈퍼레어',
+    subTitle: '',
     theme: 'light',
   },
   reducers: {
     setTitle: (state, action) => { state.title = action.payload },
+    setSubTitle: (state, action) => { state.subTitle = action.payload },
     setPage: (state, action) => { state.page = action.payload },
     setTheme: (state, action) => { state.theme = action.payload },
   }
 });
 
+const actions = {
+  ...store.actions,
+}
+
 export const App = {
-  actions: store.actions,
+  actions: actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.app);
@@ -97,10 +104,10 @@ export const App = {
 }
 
 const rootReducer = {
-  ...reducers,
+  ...compReducers,
+  ...contReducers,
+  ...pageReducers,
   app: App.reducer,
-  home: Home.reducer,
-  search: Search.reducer,
 };
 
 const rootStore = configureStore({

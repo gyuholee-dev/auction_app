@@ -21,11 +21,10 @@ const BestQuery = (props) => {
         </li>
       </ul>
     </section>
-  );
+  )
 }
 
 const History = (props)=> {
-
   const count = 10;
   const items = [];
   for (let i = 0; i < count; i++) {
@@ -41,9 +40,7 @@ const History = (props)=> {
         </td>
       </tr>
     );
-  }    
-
-
+  }
   return (
     <section id="searchhistory">
       <div className="header">
@@ -56,7 +53,7 @@ const History = (props)=> {
         </tbody>
       </table>
     </section>
-  );
+  )
 }
 
 
@@ -66,7 +63,12 @@ const store = createSlice({
   reducers: {}
 });
 
+const actions = {
+  ...store.actions,
+}
+
 export const SearchHistory = {
+  actions: actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.searchHistory);
@@ -77,6 +79,6 @@ export const SearchHistory = {
         <BestQuery />
         <History />
       </>
-    );
+    )
   }
 }

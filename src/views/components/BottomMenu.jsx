@@ -9,7 +9,12 @@ const store = createSlice({
   reducers: {}
 });
 
+const actions = {
+  ...store.actions,
+}
+
 export const BottomMenu = {
+  actions: actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.bottomMenu);

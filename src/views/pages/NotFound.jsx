@@ -2,48 +2,50 @@ import React, { useEffect } from 'react';
 import { createSlice } from '@reduxjs/toolkit';
 import { useStore, useSelector, useDispatch } from 'react-redux';
 
-import { App } from '../App';
-import { TopMenu } from './components';
+import { Header, Footer } from '@containers';
+import { App } from '@app';
 
 const store = createSlice({
   name: 'notfound',
-  initialState : {},
+  initialState : {
+    page: 'notfound',
+    title: `404 NOT FOUND`, 
+    message: `아직 안만들었습니다...` 
+  },
   reducers: {}
 });
 
+const actions = {
+  ...store.actions,
+}
+
 export const NotFound = {
-  actions: store.actions,
+  actions: actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.notfound);
   },
-  elem: (props) => {
-    const { 
-      page = 'notfound',
-      title = `404 NOT FOUND`, 
-      message = `아직 안만들었습니다...` 
-    } = props;
-    const { setPage, setTitle } = App.actions;
+  elem: () => {
+    const state = NotFound.getState();
+    const { page, title, message } = state;
+    const { setSubTitle } = App.actions;
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(setPage(page));
-      dispatch(setTitle(title));
+      dispatch(setSubTitle(title));
     }, []);
 
     return (
-      <div id={`page-${page}`} className='slide'>
-        <header>
-          <TopMenu.elem title={title} page={page}/>
-        </header>
+      <div id='page-notfound' className='slide'>
+        <Header.elem {...state} />
         <main>
           <section id="notfound">
             <p>{message}</p>
             <img src="images/cording_cat.gif" />
           </section>
         </main>
-        <footer></footer>
+        <Footer.elem {...state} />
       </div>
     )
   }

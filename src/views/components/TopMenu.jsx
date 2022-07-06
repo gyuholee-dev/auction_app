@@ -2,9 +2,10 @@ import React from 'react';
 import { createSlice } from '@reduxjs/toolkit';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useStore, useSelector, useDispatch } from 'react-redux';
-import { SideMenu } from './';
+import { useParams } from "react-router-dom";
 
-import cn from 'classnames';
+import { SideMenu } from '@components';
+import { App } from '@app';
 
 const ButtonTopMenu = (props) => {
   const {
@@ -37,6 +38,7 @@ const ButtonTopMenu = (props) => {
   }
 }
 
+// ------------------------------------------------------------
 
 const store = createSlice({
   name: 'topMenu',
@@ -44,40 +46,38 @@ const store = createSlice({
   reducers: {}
 });
 
+const actions = {
+  ...store.actions,
+}
+
 export const TopMenu = {
+  actions: actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.topMenu);
   },
   elem: (props) => {
-    const { 
-      title = '슈퍼레어', 
-      page = null,
-      category = null,
-      query = null,
-    } = props;
-
+    const { page, title } = props;
+    const { category = null, query = null } = useParams();
+    const { toggleOpen } = SideMenu.actions;
     const dispatch = useDispatch();
 
     const ButtonLeft = () => {
       switch (page) {
         case 'home':
-          return <ButtonTopMenu type='menu' onClick={()=>dispatch(SideMenu.toggle())} />
+          return <ButtonTopMenu type='menu' onClick={()=>dispatch(toggleOpen())} />
         default:
           return <ButtonTopMenu type='back' link={'/'}/>
       }
     }
-
     const ButtonRight = () => {
       switch (page) {
         case 'home':
           return <ButtonTopMenu type='search' />
       }
     }
-
     const CenterBlock = () => {
       switch (page) {
-        case 'category':
         case 'search':
           return (
             <div className="seachbox">
@@ -85,7 +85,7 @@ export const TopMenu = {
             </div>
           );
         default:
-          return <div className={cn('title', {'center':page=='home'})}>{title}</div>
+          return <div className={`title ${page=='home'&&'center'}`}>{title}</div>
       }
     }
 

@@ -17,13 +17,9 @@ const store = createSlice({
   }
 });
 
-export const Dimmer = {
-  actions: store.actions,
-  reducer: store.reducer,
-  getState : () => {
-    return useSelector(state => state.dimmer);
-  },
-  toggle: () => {
+const actions = {
+  ...store.actions,
+  toggleDimm: () => {
     return async(dispatch, getState) => {
       const { toggleShow, setClass } = Dimmer.actions;
       dispatch(toggleShow());
@@ -38,20 +34,29 @@ export const Dimmer = {
         dispatch(setClass('dimm'));
       }
     }
+  }
+}
+
+export const Dimmer = {
+  actions: actions,
+  reducer: store.reducer,
+  getState : () => {
+    return useSelector(state => state.dimmer);
   },
   elem: () => {
     const dispatch = useDispatch();
     const sideMenu = SideMenu.getState();
     const state = Dimmer.getState();
+    const { toggleOpen } = SideMenu.actions;
+    const { toggleDimm } = Dimmer.actions;
 
     useEffect(() => {
       if (sideMenu.open === state.show) return;
-      dispatch(Dimmer.toggle());
+      dispatch(toggleDimm());
     }, [sideMenu.open]);
 
     return (
-      <div className={state.className} onClick={()=>dispatch(SideMenu.toggle())}></div>
+      <div className={state.className} onClick={()=>dispatch(toggleOpen())}></div>
     )
   }
 }
-Object.assign(Dimmer, Dimmer.actions);

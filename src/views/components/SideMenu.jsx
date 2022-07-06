@@ -8,32 +8,29 @@ const store = createSlice({
     open: false,
   },
   reducers: {
-    setOpen: (state, action) => { state.open = action.payload.open },
-  }
+    setOpen: (state, action) => { state.open = action.payload },
+    toggleOpen: (state, action) => { state.open = !state.open },
+  },
 });
 
 export const SideMenu = {
+  actions: store.actions,
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.sideMenu);
   },
-  toggle: () => {
-    return async (dispatch, getState) => {
-      const { sideMenu } = getState();
-      const setOpen = store.actions.setOpen;
-      dispatch(setOpen({ open: !sideMenu.open }));
-    }
-  },
   elem: () => {
     const dispatch = useDispatch();
     const state = SideMenu.getState();
+    const { toggleOpen } = SideMenu.actions;
+
     const menuClass = state.open?'open':'close';
     return (
       <aside>
         <nav id="sidemenu" className={menuClass}>
           <div className="header">
             <div className="user"></div>
-            <button className="btn none close" onClick={()=>dispatch(SideMenu.toggle())}>
+            <button className="btn none close" onClick={()=>dispatch(toggleOpen())}>
               <i className="xi-close"></i>
             </button>
           </div>
