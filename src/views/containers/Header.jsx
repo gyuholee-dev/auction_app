@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import { 
   TopMenu,
-  CatMenu,
+  CategoryTab,
 } from '@components';
 
 const store = createSlice({
@@ -31,7 +31,8 @@ export const Header = {
     return (
       <header>
         <TopMenu.elem {...props} />
-        {((page === 'search') && (category || query)) && <CatMenu.elem />}
+        {((page === 'search') && (category || query)) && <CategoryTab.elem page={page}/>}
+        {(page === 'myauction') && <CategoryTab.elem page={page}/>}
       </header>
     )
   }

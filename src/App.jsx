@@ -12,7 +12,7 @@ import { reducers as compReducers } from '@components';
 import { reducers as contReducers } from '@containers';
 import { reducers as pageReducers } from '@pages';
 
-import { Home, Search, NotFound } from '@pages';
+import { Home, Search, MyAuction, NotFound } from '@pages';
 
 // scss
 import './styles/style.scss';
@@ -100,6 +100,10 @@ export const App = {
               <Route path=":category" element={<Search.elem />} />
               <Route path=":category/:query" element={<Search.elem />} />
               <Route path="" element={<Search.elem />} />
+            </Route>
+            <Route path="/myauction/*" element={<MyAuction.elem />}>
+              <Route path=":category" element={<MyAuction.elem />} />
+              <Route path="" element={<MyAuction.elem />} />
             </Route>
             <Route path="*" element={<NotFound.elem />} />
           </Routes>

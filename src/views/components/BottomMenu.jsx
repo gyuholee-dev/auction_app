@@ -29,12 +29,12 @@ export const BottomMenu = {
           <span>홈</span>
         </button>
         <button className="btn none"
-          onClick={() => navigate('/search/games')}>
+          onClick={() => navigate('/search/1')}>
           <i className="xi-document"></i>
           <span>카테고리</span>
         </button>
         <button className="btn none"
-          onClick={() => navigate('/auction')}>
+          onClick={() => navigate('/myauction/1')}>
           <i className="xi-gift-o"></i>
           <span>나의 경매</span>
         </button>

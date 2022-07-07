@@ -82,7 +82,8 @@ export const Main = {
           </main>
         )
       case 'search':
-      if (!category && !query) {
+      case 'myauction':
+      if (page === 'search' && !category && !query) {
         return (<main className='slide'><SearchHistory.elem /></main>);
       } else {
         return (

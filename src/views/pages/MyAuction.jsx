@@ -7,16 +7,14 @@ import { Header, Main, Footer } from '@containers';
 import { App } from '@app';
 
 const store = createSlice({
-  name: 'search',
+  name: 'myauction',
   initialState : {
-    page: 'search',
-    title: '검색결과',
+    page: 'myauction',
+    title: '나의 경매',
     category: '0',
-    query: null,
   },
   reducers: {
     setCategory: (state, action) => { state.category = action.payload },
-    setQuery: (state, action) => { state.query = action.payload },
   }
 });
 
@@ -24,18 +22,18 @@ const actions = {
   ...store.actions,
 }
 
-export const Search = {
+export const MyAuction = {
   actions: actions,
   reducer: store.reducer,
   getState : () => {
-    return useSelector(state => state.search);
+    return useSelector(state => state.myauction);
   },
   elem: () => {
-    const state = Search.getState();
+    const state = MyAuction.getState();
     const { page, title } = state;
     const { setSubTitle } = App.actions;
-    const { setCategory, setQuery } = Search.actions;
-    const { category = null, query = null } = useParams();
+    const { setCategory } = MyAuction.actions;
+    const { category = null } = useParams();
 
     const dispatch = useDispatch();
 
@@ -44,12 +42,10 @@ export const Search = {
     }, []);
     useEffect(() => {
       dispatch(setCategory(category));
-      dispatch(setQuery(query));
-    }, [category, query]);
+    }, [category]);
 
-    const pageId = (!category && !query)?'page-search':'page-search-result';
     return (
-      <div id={pageId} className='slide'>
+      <div id='page-myauction' className='slide'>
         <Header.elem {...state} />
         <Main.elem {...state} />
         <Footer.elem {...state} />

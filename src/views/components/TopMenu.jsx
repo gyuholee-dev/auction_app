@@ -20,21 +20,28 @@ const ButtonTopMenu = (props) => {
         <button className="btn none" onClick={onClick}>
           <i className="xi-bars"></i>
         </button>
-      );
+      )
     case 'search':
       return (
         <button className="btn none"
           onClick={()=>navigate('/search')}>
           <i className="xi-search"></i>
         </button>
-      );
+      )
+    case 'notify':
+      return (
+        <button className="btn none"
+          onClick={()=>navigate('/notify')}>
+          <i className="xi-bell-o"></i>
+        </button>
+      )
     case 'back':
       return (
         <button className="btn none"
           onClick={()=>navigate(link?link:-1)}>
           <i className="xi-angle-left"></i>
         </button>
-      );
+      )
   }
 }
 
@@ -70,12 +77,6 @@ export const TopMenu = {
           return <ButtonTopMenu type='back' link={'/'}/>
       }
     }
-    const ButtonRight = () => {
-      switch (page) {
-        case 'home':
-          return <ButtonTopMenu type='search' />
-      }
-    }
     const CenterBlock = () => {
       switch (page) {
         case 'search':
@@ -85,7 +86,15 @@ export const TopMenu = {
             </div>
           );
         default:
-          return <div className={`title ${page=='home'&&'center'}`}>{title}</div>
+          return <div className={`title ${(page==='home')?'center':''}`}>{title}</div>
+      }
+    }
+    const ButtonRight = () => {
+      switch (page) {
+        case 'home':
+          return <ButtonTopMenu type='search' />
+        case 'myauction':
+          return <ButtonTopMenu type='notify' />
       }
     }
 

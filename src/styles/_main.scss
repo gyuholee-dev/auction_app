@@ -70,7 +70,7 @@ header:not(:empty) {
   transition: height 0.25s;
   border-bottom: 1px solid rgba(black, 0.35);
 }
-#page-search-result {
+#page-search-result, #page-myauction {
   header:not(:empty) {
     height: 90px;
   }
@@ -123,7 +123,7 @@ nav {
   }
 }
 
-#catmenu {
+#categorytab {
   position: relative;
   height: 34px;
   .items {
@@ -159,12 +159,17 @@ footer:not(:empty) {
 
 #bottommenu {
   position: relative;
+  padding: 0;
   .btn {
     @include flex(center, center, column);
-    width: 15%;
+    width: 25%;
+    height: inherit;
     overflow: visible;
-    &:last-child {
-      margin-right: 10px;
+    // &:last-child {
+    //   margin-right: 10px;
+    // }
+    i {
+      margin-bottom: 5px;
     }
     >span {
       font-size: 12px;

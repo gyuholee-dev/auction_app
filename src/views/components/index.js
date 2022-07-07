@@ -1,7 +1,7 @@
 import { Dimmer } from './Dimmer.jsx';
 import { SideMenu } from './SideMenu.jsx';
 import { TopMenu } from './TopMenu.jsx';
-import { CatMenu } from './CatMenu.jsx';
+import { CategoryTab } from './CategoryTab.jsx';
 import { ImgSlide } from './ImgSlide.jsx';
 import { OrderSelect } from './OrderSelect.jsx';
 import { ItemList } from './ItemList.jsx';
@@ -12,7 +12,7 @@ export const reducers = {
   dimmer: Dimmer.reducer,
   sideMenu: SideMenu.reducer,
   topMenu: TopMenu.reducer,
-  catMenu : CatMenu.reducer,
+  categoryTab : CategoryTab.reducer,
   imgSlide : ImgSlide.reducer,
   orderSelect : OrderSelect.reducer,
   itemList : ItemList.reducer,
@@ -23,7 +23,7 @@ export {
   Dimmer,
   SideMenu,
   TopMenu,
-  CatMenu,
+  CategoryTab,
   ImgSlide,
   OrderSelect,
   ItemList,
