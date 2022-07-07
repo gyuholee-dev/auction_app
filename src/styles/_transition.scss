@@ -5,7 +5,7 @@ $transition-page: all 350ms;
   width: 100%;
   height: -webkit-fill-available;
 }
-.anim-appear-done {
+.anim-appear-done, .anim-stop {
   filter: brightness(1) !important;
   transform: scale(1) translateX(0) !important;
   transition: none !important;

@@ -52,6 +52,8 @@ export const Main = {
       },
       onEnter: (node) => {
         if (!node) return;
+        const currentCat = window.location.pathname.split('/')[2];
+        if (!prevCat || !currentCat) { node.className = 'anim-stop'; return; }
         if (prevCat < category) {
           node.className = 'slide-in anim-enter';
         } else {
@@ -61,6 +63,7 @@ export const Main = {
       onExit: (node) => {
         if (!node) return;
         const currentCat = window.location.pathname.split('/')[2];
+        if (!currentCat) { node.className = 'anim-stop'; return; }
         if (prevCat < currentCat) {
           node.className = 'slide-in anim-exit';
         } else {
@@ -90,6 +93,7 @@ export const Main = {
           <TransitionGroup className="transition-group" appear={true}>
             <CSSTransition {...transitionProps}>
               <Routes>
+                <Route path="/" element={(<main><ItemList.elem /></main>)} />
                 <Route path="/:category" element={(<main><ItemList.elem /></main>)} />
                 <Route path="/:category/:query" element={(<main><ItemList.elem /></main>)} />
               </Routes>
