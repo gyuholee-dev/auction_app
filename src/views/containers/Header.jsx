@@ -22,7 +22,7 @@ export const Header = {
   actions: actions,
   reducer: store.reducer,
   getState : () => {
-    return useSelector(state => state.home);
+    return useSelector(state => state.header);
   },
   elem: (props) => {
     const { page } = props;

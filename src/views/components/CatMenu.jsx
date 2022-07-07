@@ -24,17 +24,17 @@ export const CatMenu = {
     return (
       <nav id="catmenu" className="menu top">
         <ul className="items">
-          <li className={`item ${(category=='games')&&'active'}`}>
-            <Link to={`/search/games${query?'/'+query:''}`}>게임</Link>
+          <li className={`item ${(category=='1')&&'active'}`}>
+            <Link to={`/search/1${query?'/'+query:''}`}>게임</Link>
           </li>
-          <li className={`item ${(category=='comics')&&'active'}`}>
-            <Link to={`/search/comics${query?'/'+query:''}`}>만화</Link>
+          <li className={`item ${(category=='2')&&'active'}`}>
+            <Link to={`/search/2${query?'/'+query:''}`}>만화</Link>
           </li>
-          <li className={`item ${(category=='books')&&'active'}`}>
-            <Link to={`/search/books${query?'/'+query:''}`}>도서</Link>
+          <li className={`item ${(category=='3')&&'active'}`}>
+            <Link to={`/search/3${query?'/'+query:''}`}>도서</Link>
           </li>
-          <li className={`item ${(category=='music')&&'active'}`}>
-            <Link to={`/search/music${query?'/'+query:''}`}>음반</Link>
+          <li className={`item ${(category=='4')&&'active'}`}>
+            <Link to={`/search/4${query?'/'+query:''}`}>음반</Link>
           </li>
         </ul>
       </nav>

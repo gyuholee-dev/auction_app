@@ -1,9 +1,15 @@
+$transition-page: all 350ms;
 
 .transition-group {
   position: relative;
+  width: 100%;
+  height: -webkit-fill-available;
 }
-
-$transition-page: all 350ms;
+.anim-appear-done {
+  filter: brightness(1) !important;
+  transform: scale(1) translateX(0) !important;
+  transition: none !important;
+}
 
 .fade {
   // z-index: 1;
@@ -39,6 +45,54 @@ $transition-page: all 350ms;
   z-index: 2;
   &.anim-enter {
     transform: translateX(100%);
+  }
+
+  // 마운트 활성화
+  &.anim-enter-active {
+    transform: translateX(0);
+    transition: $transition-page;
+  }
+
+  // 언마운트 전
+  &.anim-exit {
+    transform: translateX(0);
+  }
+
+  // 언마운트 활성화
+  &.anim-exit-active {
+    transform: translateX(100%);
+    transition: $transition-page;
+  }
+}
+.slide-in {
+  // 마운트 전
+  z-index: 2;
+  &.anim-enter {
+    transform: translateX(100%);
+  }
+
+  // 마운트 활성화
+  &.anim-enter-active {
+    transform: translateX(0);
+    transition: $transition-page;
+  }
+
+  // 언마운트 전
+  &.anim-exit {
+    transform: translateX(0);
+  }
+
+  // 언마운트 활성화
+  &.anim-exit-active {
+    transform: translateX(-100%);
+    transition: $transition-page;
+  }
+}
+.slide-out {
+  // 마운트 전
+  z-index: 2;
+  &.anim-enter {
+    transform: translateX(-100%);
   }
 
   // 마운트 활성화

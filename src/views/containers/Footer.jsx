@@ -21,7 +21,7 @@ export const Footer = {
   actions: actions,
   reducer: store.reducer,
   getState : () => {
-    return useSelector(state => state.home);
+    return useSelector(state => state.footer);
   },
   elem: (props) => {
     const { page } = props;

@@ -52,8 +52,7 @@ export const App = {
     const { title, subTitle, theme, stack } = App.getState();
     const { setTitle, setSubTitle, setTheme } = App.actions;
     const location = useLocation();
-    let { pathname } = location;
-    pathname = '/' + pathname.split('/')[1];
+    const pathname = '/' + location.pathname.split('/')[1];
 
     const dispatch = useDispatch();
 
