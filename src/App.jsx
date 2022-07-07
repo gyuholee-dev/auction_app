@@ -22,16 +22,19 @@ import './styles/style.scss';
 const store = createSlice({
   name: 'app',
   initialState : {
-    page: 'home',
     title: '슈퍼레어',
     subTitle: '',
-    theme: 'light',
+    theme: 'dark',
+    stack: [],
   },
   reducers: {
     setTitle: (state, action) => { state.title = action.payload },
     setSubTitle: (state, action) => { state.subTitle = action.payload },
-    setPage: (state, action) => { state.page = action.payload },
-    setTheme: (state, action) => { state.theme = action.payload },
+    setTheme: (state, action) => { 
+      state.theme = action.payload;
+      const themeClass = action.payload ? `theme-${action.payload}` : '';
+      document.body.className = themeClass;
+    },
   }
 });
 
@@ -46,16 +49,17 @@ export const App = {
     return useSelector(state => state.app);
   },
   elem: () => {
-    const { title, page, stack } = App.getState();
+    const { title, subTitle, theme, stack } = App.getState();
+    const { setTitle, setSubTitle, setTheme } = App.actions;
     const location = useLocation();
     let { pathname } = location;
     pathname = '/' + pathname.split('/')[1];
 
-    function getPath() {
-      return window.location.pathname;
-    }
+    const dispatch = useDispatch();
 
-    // const dispatch = useDispatch();
+    // function getPath() {
+    //   return window.location.pathname;
+    // }
     // function pushStack(pathname) {
     //   if (pathname == '/') { 
     //     dispatch(setStack([pathname])); 
@@ -63,10 +67,13 @@ export const App = {
     //     dispatch(setStack([...stack, pathname]));
     //   }
     // }
-
     // function setTransition(elem, className) {
     //   elem.className = className;
     // }
+
+    useEffect(() => {
+      dispatch(setTheme(theme));
+    }, [theme]);
 
     // useEffect(() => {
     //   pushStack(pathname);
@@ -113,13 +120,6 @@ const rootReducer = {
 const rootStore = configureStore({
   reducer: combineReducers(rootReducer)
 });
-
-// console.log(rootStore.getState());
-// const listener = () => {
-//   const state = rootStore.getState();
-//   console.log(state);
-// };
-// rootStore.subscribe(listener);
 
 const root = createRoot(document.getElementById('app-root'));
 root.render(
