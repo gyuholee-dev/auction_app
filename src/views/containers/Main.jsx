@@ -10,6 +10,7 @@ import {
   ItemList,
   SearchHistory,
   MemberInfo,
+  PointBalance,
 } from '@components';
 
 const store = createSlice({
@@ -106,6 +107,7 @@ export const Main = {
         return (
           <main>
             <MemberInfo.elem />
+            <PointBalance.elem />
           </main>
         )
     }

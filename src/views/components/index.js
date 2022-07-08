@@ -7,6 +7,7 @@ import { OrderSelect } from './OrderSelect.jsx';
 import { ItemList } from './ItemList.jsx';
 import { SearchHistory } from './SearchHistory.jsx';
 import { MemberInfo } from './MemberInfo.jsx';
+import { PointBalance } from './PointBalance.jsx';
 import { BottomMenu } from './BottomMenu.jsx';
 
 export const reducers = {
@@ -19,6 +20,7 @@ export const reducers = {
   itemList : ItemList.reducer,
   searchHistory : SearchHistory.reducer,
   memberInfo : MemberInfo.reducer,
+  pointBalance : PointBalance.reducer,
   bottomMenu: BottomMenu.reducer,
 }
 export {
@@ -31,5 +33,6 @@ export {
   ItemList,
   SearchHistory,
   MemberInfo,
+  PointBalance,
   BottomMenu,
 }
