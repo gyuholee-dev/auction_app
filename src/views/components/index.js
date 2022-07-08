@@ -10,6 +10,8 @@ import { SearchHistory } from './SearchHistory.jsx';
 import { MemberInfo } from './MemberInfo.jsx';
 import { PointBalance } from './PointBalance.jsx';
 import { TrxHistory } from './TrxHistory.jsx';
+import { NoticeSlide } from './NoticeSlide.jsx';
+import { InfoMenu } from './InfoMenu.jsx';
 
 export const reducers = {
   dimmer: Dimmer.reducer,
@@ -24,6 +26,8 @@ export const reducers = {
   memberInfo : MemberInfo.reducer,
   pointBalance : PointBalance.reducer,
   trxHistory : TrxHistory.reducer,
+  noticeSlide : NoticeSlide.reducer,
+  infoMenu : InfoMenu.reducer,
 }
 export {
   Dimmer,
@@ -38,4 +42,6 @@ export {
   MemberInfo,
   PointBalance,
   TrxHistory,
+  NoticeSlide,
+  InfoMenu,
 }

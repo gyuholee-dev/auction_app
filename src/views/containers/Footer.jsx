@@ -4,6 +4,8 @@ import { useStore, useSelector, useDispatch } from 'react-redux';
 
 import { 
   BottomMenu,
+  NoticeSlide,
+  InfoMenu,
 } from '@components';
 import { App } from '@app';
 
@@ -28,6 +30,8 @@ export const Footer = {
     return (
       <footer>
         { page === 'home' && <BottomMenu.elem /> }
+        { page === 'myservice' && <NoticeSlide.elem /> }
+        { page === 'myservice' && <InfoMenu.elem /> }
       </footer>
     )
   }

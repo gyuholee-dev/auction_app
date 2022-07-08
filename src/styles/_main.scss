@@ -483,4 +483,26 @@ main {
   }
 }
 
+#noticeslide {
+  @include flex(center, start);
+  width: 100%;
+  padding: 10px 15px 5px;
+  font-size: 14px;
+  line-height: 1.3;
+  background-color: var(--color-nav);
+  .title {
+    font-weight: bold;
+    padding: 3px 5px;
+    background-color: var(--color-box-grey);
+    border-radius: 5px;
+    margin-right: 15px;
+  }
+}
+
+#infomenu {
+  @include flex(center, space-around);
+  height: auto;
+  padding: 10px 15px;
+  font-size: 14px;
+}
 
