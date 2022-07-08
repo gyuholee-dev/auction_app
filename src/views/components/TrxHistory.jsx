@@ -19,7 +19,7 @@ export const TrxHistory = {
   },
   elem: () => {
 
-    const count = 5;
+    const count = 8;
     const items = [];
     for (let i = 0; i < count; i++) {
       items.push(
