@@ -30,8 +30,8 @@ const ButtonTopMenu = (props) => {
       )
     case 'notify':
       return (
-        <button className="btn none"
-          onClick={()=>navigate('/notify')}>
+        // onClick={()=>navigate('/notify')}
+        <button className="btn none">
           <i className="xi-bell-o"></i>
         </button>
       )
