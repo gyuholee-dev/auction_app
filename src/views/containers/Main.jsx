@@ -11,6 +11,7 @@ import {
   SearchHistory,
   MemberInfo,
   PointBalance,
+  TrxHistory,
 } from '@components';
 
 const store = createSlice({
@@ -108,6 +109,7 @@ export const Main = {
           <main>
             <MemberInfo.elem />
             <PointBalance.elem />
+            <TrxHistory.elem />
           </main>
         )
     }

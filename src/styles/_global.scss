@@ -148,6 +148,7 @@ input[type=reset] {
     }
   }
   &.none {
+    font-weight: normal;
     padding: 0;
     border: none;
     background-color: initial;
