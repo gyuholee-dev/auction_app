@@ -9,6 +9,7 @@ import {
   ImgSlide,
   ItemList,
   SearchHistory,
+  MemberInfo,
 } from '@components';
 
 const store = createSlice({
@@ -86,21 +87,27 @@ export const Main = {
         )
       case 'search':
       case 'myauction':
-      if (page === 'search' && !category && !query) {
-        return (<main className='slide'><SearchHistory.elem /></main>);
-      } else {
+        if (page === 'search' && !category && !query) {
+          return (<main className='slide'><SearchHistory.elem /></main>);
+        } else {
+          return (
+            <TransitionGroup className="transition-group" appear={true}>
+              <CSSTransition {...transitionProps}>
+                <Routes>
+                  <Route path="/" element={(<main><ItemList.elem /></main>)} />
+                  <Route path="/:category" element={(<main><ItemList.elem /></main>)} />
+                  <Route path="/:category/:query" element={(<main><ItemList.elem /></main>)} />
+                </Routes>
+              </CSSTransition>
+            </TransitionGroup>
+          )
+        }
+      case 'myservice':
         return (
-          <TransitionGroup className="transition-group" appear={true}>
-            <CSSTransition {...transitionProps}>
-              <Routes>
-                <Route path="/" element={(<main><ItemList.elem /></main>)} />
-                <Route path="/:category" element={(<main><ItemList.elem /></main>)} />
-                <Route path="/:category/:query" element={(<main><ItemList.elem /></main>)} />
-              </Routes>
-            </CSSTransition>
-          </TransitionGroup>
+          <main>
+            <MemberInfo.elem />
+          </main>
         )
-      }
     }
   }
 }

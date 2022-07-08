@@ -35,6 +35,13 @@ const ButtonTopMenu = (props) => {
           <i className="xi-bell-o"></i>
         </button>
       )
+    case 'setting':
+      return (
+        // onClick={()=>navigate('/setting')}
+        <button className="btn none">
+          <i className="xi-cog"></i>
+        </button>
+      )
     case 'back':
       return (
         <button className="btn none"
@@ -95,6 +102,8 @@ export const TopMenu = {
           return <ButtonTopMenu type='search' />
         case 'myauction':
           return <ButtonTopMenu type='notify' />
+        case 'myservice':
+          return <ButtonTopMenu type='setting' />
       }
     }
 

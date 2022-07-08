@@ -39,7 +39,7 @@ export const BottomMenu = {
           <span>나의 경매</span>
         </button>
         <button className="btn none"
-          onClick={() => navigate('/mypage')}>
+          onClick={() => navigate('/myservice')}>
           <i className="xi-user-o"></i>
           <span>나의 슈퍼레어</span>
         </button>

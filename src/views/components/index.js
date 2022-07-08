@@ -6,6 +6,7 @@ import { ImgSlide } from './ImgSlide.jsx';
 import { OrderSelect } from './OrderSelect.jsx';
 import { ItemList } from './ItemList.jsx';
 import { SearchHistory } from './SearchHistory.jsx';
+import { MemberInfo } from './MemberInfo.jsx';
 import { BottomMenu } from './BottomMenu.jsx';
 
 export const reducers = {
@@ -17,6 +18,7 @@ export const reducers = {
   orderSelect : OrderSelect.reducer,
   itemList : ItemList.reducer,
   searchHistory : SearchHistory.reducer,
+  memberInfo : MemberInfo.reducer,
   bottomMenu: BottomMenu.reducer,
 }
 export {
@@ -28,5 +30,6 @@ export {
   OrderSelect,
   ItemList,
   SearchHistory,
+  MemberInfo,
   BottomMenu,
 }

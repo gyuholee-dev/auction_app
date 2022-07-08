@@ -387,4 +387,53 @@ main {
   }
 }
 
+#memberinfo {
+  @include flex(center, space-between);
+  width: 100%;
+  height: 72px;
+  padding: 10px 0;
+  .member {
+    @include flex(center, start);
+    width: 100%;
+    height: 100%;
+    .avatar {
+      @include flex(center, center);
+      width: 76px;
+      height: inherit;
+      // margin-right: 10px;
+      .default {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: none;
+        border-width: 0px;
+        background-color: $grey-50;
+        position: absolute;
+        .img {
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+    .info {
+      .name {
+        font-size: 16px;
+      }
+      .address {
+        font-size: 14px;
+      }
+    }
+  }
+  .btn {
+    font-size: 20px;
+    width: 60px;
+    height: 100%;
+  }
+}
+
 
