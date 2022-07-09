@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useStore, useSelector, useDispatch } from 'react-redux';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
@@ -12,7 +12,8 @@ import { reducers as compReducers } from '@components';
 import { reducers as contReducers } from '@containers';
 import { reducers as pageReducers } from '@pages';
 
-import { Home, NotFound, Search, MyAuction, MyService } from '@pages';
+import { Pages } from './Pages';
+
 import { appConfig } from '/configs/appConfig';
 
 // scss
@@ -26,7 +27,6 @@ const store = createSlice({
     title: '슈퍼레어',
     subTitle: '',
     theme: 'dark',
-    stack: [],
   },
   reducers: {
     setTitle: (state, action) => { state.title = action.payload },
@@ -36,8 +36,6 @@ const store = createSlice({
       const themeClass = action.payload ? `theme-${action.payload}` : '';
       document.body.className = themeClass;
     },
-    pushStack: (state, action) => { state.stack.push(action.payload) },
-    resetStack: (state, action) => { state.stack = [0] },
   }
 });
 
@@ -68,38 +66,25 @@ export const App = {
     return useSelector(state => state.app);
   },
   elem: () => {
-    const { title, subTitle, theme, stack } = App.getState();
+    const { title, subTitle, theme } = App.getState();
+    let stack = useRef([0]);
     const { 
       setTitle, setSubTitle, setTheme, 
-      pushStack, resetStack, getCurrentPath, getPageDepth } = App.actions;
+      getCurrentPath, getPageDepth } = App.actions;
     const location = useLocation();
     const pathname = location.pathname.split('/')[1];
 
     const dispatch = useDispatch();
-
-    // function getPath() {
-    //   return window.location.pathname;
-    // }
-    // function pushStack(pathname) {
-    //   if (pathname == '/') { 
-    //     dispatch(setStack([pathname])); 
-    //   } else {
-    //     dispatch(setStack([...stack, pathname]));
-    //   }
-    // }
-    // function setTransition(elem, className) {
-    //   elem.className = className;
-    // }
 
     useEffect(() => {
       dispatch(setTheme(theme));
     }, [theme]);
 
     useEffect(() => {
-      if (pathname === '/') {
-        dispatch(resetStack());
+      if (pathname === '') {
+        stack.current = [0];
       } else {
-        dispatch(pushStack(getPageDepth(pathname, stack.at(-1))));
+        stack.current.push(getPageDepth(pathname, stack.current.at(-1)));
       }
     }, [pathname]);
 
@@ -108,7 +93,7 @@ export const App = {
       classNames: "anim",
       timeout: { enter: 350, exit: 350 },
       onEnter: (node) => {
-        const lastStack = stack.at(-1);
+        const lastStack = stack.current.at(-1);
         const currentDepth = getPageDepth(getCurrentPath(), lastStack);
         if (lastStack < currentDepth) {
           node.className = 'slide anim-enter';
@@ -117,7 +102,7 @@ export const App = {
         }
       },
       onExit: (node) => {
-        const lastStack = stack.at(-1);
+        const lastStack = stack.current.at(-1);
         const currentDepth = getPageDepth(getCurrentPath(), lastStack);
         if (lastStack < currentDepth) {
           node.className = 'fade';
@@ -126,26 +111,12 @@ export const App = {
         }
       }
     }
-
+    
     return (
       <TransitionGroup className="transition-group">
         <CSSTransition {...transitionProps}>
           <Routes location={location}>
-            <Route path="/" element={<Home.elem />} />
-            <Route path="/search/*" element={<Search.elem />}>
-              <Route path=":category" element={<Search.elem />} />
-              <Route path=":category/:query" element={<Search.elem />} />
-              <Route path="" element={<Search.elem />} />
-            </Route>
-            <Route path="/myauction/*" element={<MyAuction.elem />}>
-              <Route path=":category" element={<MyAuction.elem />} />
-              <Route path="" element={<MyAuction.elem />} />
-            </Route>
-            <Route path="/myservice/*" element={<MyService.elem />}>
-              <Route path=":category" element={<MyService.elem />} />
-              <Route path="" element={<MyService.elem />} />
-            </Route>
-            <Route path="*" element={<NotFound.elem />} />
+            <Route path="*" element={<Pages.elem />} />
           </Routes>
         </CSSTransition>
       </TransitionGroup>

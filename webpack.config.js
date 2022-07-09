@@ -14,7 +14,6 @@ export default (env, argv) => {
 
   const entry = ['./src/App'];
 
-  const babelPlugins = [];
   const plugins = [
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
@@ -76,10 +75,10 @@ export default (env, argv) => {
           loader: 'babel-loader',
           options: {
             presets: [
-             '@babel/preset-env', 
-             '@babel/preset-react'
+              '@babel/preset-env', 
+              ['@babel/preset-react', { 'runtime': 'automatic' }]
             ],
-            plugins: babelPlugins,
+            plugins: [],
           },
           exclude: /node_modules/
         },
