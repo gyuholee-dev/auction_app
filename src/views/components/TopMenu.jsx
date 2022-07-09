@@ -30,15 +30,15 @@ const ButtonTopMenu = (props) => {
       )
     case 'notify':
       return (
-        // onClick={()=>navigate('/notify')}
-        <button className="btn none">
+        <button className="btn none"
+          onClick={()=>navigate('/notify')}>
           <i className="xi-bell-o"></i>
         </button>
       )
     case 'setting':
       return (
-        // onClick={()=>navigate('/setting')}
-        <button className="btn none">
+        <button className="btn none"
+          onClick={()=>navigate('/setting')}>
           <i className="xi-cog"></i>
         </button>
       )
@@ -80,6 +80,8 @@ export const TopMenu = {
       switch (page) {
         case 'home':
           return <ButtonTopMenu type='menu' onClick={()=>dispatch(toggleOpen())} />
+        case 'notfound':
+          return <ButtonTopMenu type='back'/>
         default:
           return <ButtonTopMenu type='back' link={'/'}/>
       }

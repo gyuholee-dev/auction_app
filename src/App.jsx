@@ -13,6 +13,7 @@ import { reducers as contReducers } from '@containers';
 import { reducers as pageReducers } from '@pages';
 
 import { Home, NotFound, Search, MyAuction, MyService } from '@pages';
+import { appConfig } from '/configs/appConfig';
 
 // scss
 import './styles/style.scss';
@@ -35,11 +36,29 @@ const store = createSlice({
       const themeClass = action.payload ? `theme-${action.payload}` : '';
       document.body.className = themeClass;
     },
+    pushStack: (state, action) => { state.stack.push(action.payload) },
+    resetStack: (state, action) => { state.stack = [0] },
   }
 });
 
 const actions = {
   ...store.actions,
+  getCurrentPath: () => {
+    const pageConf = appConfig.pages;
+    let path = window.location.pathname.split('/')[1];
+    if (path === '') path = 'home';
+    if (!pageConf[path]) path = 'notfound';
+    return path;
+  },
+  getPageDepth: (currentPath=null, prev=0) => {
+    if (!currentPath) currentPath = App.actions.getCurrentPath();
+    const pageConf = appConfig.pages;
+    if (currentPath==='notfound' || !pageConf[currentPath]) { 
+      return prev+1;
+    } else {
+      return pageConf[currentPath].depth;
+    }
+  }
 }
 
 export const App = {
@@ -50,9 +69,11 @@ export const App = {
   },
   elem: () => {
     const { title, subTitle, theme, stack } = App.getState();
-    const { setTitle, setSubTitle, setTheme } = App.actions;
+    const { 
+      setTitle, setSubTitle, setTheme, 
+      pushStack, resetStack, getCurrentPath, getPageDepth } = App.actions;
     const location = useLocation();
-    const pathname = '/' + location.pathname.split('/')[1];
+    const pathname = location.pathname.split('/')[1];
 
     const dispatch = useDispatch();
 
@@ -74,21 +95,36 @@ export const App = {
       dispatch(setTheme(theme));
     }, [theme]);
 
-    // useEffect(() => {
-    //   pushStack(pathname);
-    // }, [pathname]);
+    useEffect(() => {
+      if (pathname === '/') {
+        dispatch(resetStack());
+      } else {
+        dispatch(pushStack(getPageDepth(pathname, stack.at(-1))));
+      }
+    }, [pathname]);
 
     const transitionProps = {
       key: pathname,
       classNames: "anim",
       timeout: { enter: 350, exit: 350 },
-      // onExit: (elem) => {
-      //   const lastStack = stack.at(-1);
-      //   const incomePath = '/' + getPath().split('/')[1];
-      //   if (lastStack === incomePath) {
-      //     setTransition(elem, 'fade');
-      //   }
-      // }
+      onEnter: (node) => {
+        const lastStack = stack.at(-1);
+        const currentDepth = getPageDepth(getCurrentPath(), lastStack);
+        if (lastStack < currentDepth) {
+          node.className = 'slide anim-enter';
+        } else {
+          node.className = 'fade anim-enter';
+        }
+      },
+      onExit: (node) => {
+        const lastStack = stack.at(-1);
+        const currentDepth = getPageDepth(getCurrentPath(), lastStack);
+        if (lastStack < currentDepth) {
+          node.className = 'fade';
+        } else {
+          node.className = 'slide';
+        }
+      }
     }
 
     return (
