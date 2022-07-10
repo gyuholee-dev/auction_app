@@ -111,7 +111,6 @@ export const App = {
         }
       }
     }
-    
     return (
       <TransitionGroup className="transition-group">
         <CSSTransition {...transitionProps}>
