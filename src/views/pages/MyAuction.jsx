@@ -4,7 +4,7 @@ import { useStore, useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 
 import { Header, Main, Footer } from '@containers';
-import { App } from '@app';
+import { Head } from '/src/Head';
 
 const store = createSlice({
   name: 'myauction',
@@ -31,7 +31,7 @@ export const MyAuction = {
   elem: () => {
     const state = MyAuction.getState();
     const { page, title } = state;
-    const { setSubTitle } = App.actions;
+    const { setSubTitle } = Head.actions;
     const { setCategory } = MyAuction.actions;
     const { category = null } = useParams();
 

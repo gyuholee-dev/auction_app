@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { useStore, useSelector, useDispatch } from 'react-redux';
 
 import { Header, Footer } from '@containers';
-import { App } from '@app';
+import { Head } from '/src/Head';
 
 const store = createSlice({
   name: 'notfound',
@@ -28,7 +28,7 @@ export const NotFound = {
   elem: () => {
     const state = NotFound.getState();
     const { page, title, message } = state;
-    const { setSubTitle } = App.actions;
+    const { setSubTitle } = Head.actions;
 
     const dispatch = useDispatch();
 

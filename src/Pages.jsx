@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { match } from 'path-to-regexp';
 
 import { Home, NotFound, Search, MyAuction, MyService } from '@pages';
-import { appConfig } from '/configs/appConfig';
+import { appConfig } from '/configs/app.config';
 
 export const Pages = {
   elem: () => {

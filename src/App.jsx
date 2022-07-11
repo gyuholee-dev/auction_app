@@ -12,9 +12,9 @@ import { reducers as compReducers } from '@components';
 import { reducers as contReducers } from '@containers';
 import { reducers as pageReducers } from '@pages';
 
+import { appConfig } from '/configs/app.config';
+import { Head } from './Head';
 import { Pages } from './Pages';
-
-import { appConfig } from '/configs/appConfig';
 
 // scss
 import './styles/style.scss';
@@ -23,20 +23,8 @@ import './styles/style.scss';
 
 const store = createSlice({
   name: 'app',
-  initialState : {
-    title: '슈퍼레어',
-    subTitle: '',
-    theme: 'dark',
-  },
-  reducers: {
-    setTitle: (state, action) => { state.title = action.payload },
-    setSubTitle: (state, action) => { state.subTitle = action.payload },
-    setTheme: (state, action) => { 
-      state.theme = action.payload;
-      const themeClass = action.payload ? `theme-${action.payload}` : '';
-      document.body.className = themeClass;
-    },
-  }
+  initialState : {},
+  reducers: {}
 });
 
 const actions = {
@@ -66,19 +54,12 @@ export const App = {
     return useSelector(state => state.app);
   },
   elem: () => {
-    const { title, subTitle, theme } = App.getState();
     let stack = useRef([0]);
-    const { 
-      setTitle, setSubTitle, setTheme, 
-      getCurrentPath, getPageDepth } = App.actions;
+    const { getCurrentPath, getPageDepth } = App.actions;
     const location = useLocation();
     const pathname = location.pathname.split('/')[1];
 
     const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(setTheme(theme));
-    }, [theme]);
 
     useEffect(() => {
       if (pathname === '') {
@@ -127,6 +108,7 @@ const rootReducer = {
   ...compReducers,
   ...contReducers,
   ...pageReducers,
+  head: Head.reducer,
   app: App.reducer,
 };
 
@@ -138,6 +120,7 @@ const root = createRoot(document.getElementById('app-root'));
 root.render(
   <Provider store={rootStore}>
     <BrowserRouter>
+      <Head.elem />
       <App.elem />
     </BrowserRouter>
   </Provider>

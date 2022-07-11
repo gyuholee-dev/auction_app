@@ -120,6 +120,7 @@ export default (env, argv) => {
       extensions: ['.js', '.jsx'],
       alias: {
         '@app': path.resolve('src/App'),
+        '@config': path.resolve('configs/Config.jsx'),
         '@views': path.resolve('src/views'),
         '@components': path.resolve('src/views/components'),
         '@containers': path.resolve('src/views/containers'),

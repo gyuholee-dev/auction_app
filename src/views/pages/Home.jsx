@@ -7,7 +7,7 @@ import {
   SideMenu,
 } from '@components';
 import { Header, Main, Footer } from '@containers';
-import { App } from '@app';
+import { Head } from '/src/Head';
 
 const store = createSlice({
   name: 'home',
@@ -30,7 +30,7 @@ export const Home = {
   },
   elem: () => {
     const state = Home.getState();
-    const { setSubTitle } = App.actions;
+    const { setSubTitle } = Head.actions;
 
     const dispatch = useDispatch();
 
