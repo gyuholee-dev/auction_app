@@ -12,9 +12,9 @@ import { reducers as compReducers } from '@components';
 import { reducers as contReducers } from '@containers';
 import { reducers as pageReducers } from '@pages';
 
+import { Home, NotFound, Search, MyAuction, MyService } from '@pages';
 import { appConfig } from '/configs/app.config';
 import { Head } from './Head';
-import { Pages } from './Pages';
 
 // scss
 import './styles/style.scss';
@@ -96,7 +96,18 @@ export const App = {
       <TransitionGroup className="transition-group">
         <CSSTransition {...transitionProps}>
           <Routes location={location}>
-            <Route path="*" element={<Pages.elem />} />
+            <Route path="/" element={<Home.elem />} />
+            <Route path="/search/*" element={<Search.elem />}>
+              <Route path=":category" element={<Search.elem />} />
+              <Route path=":category/:query" element={<Search.elem />} />
+            </Route>
+            <Route path="/myauction/*" element={<MyAuction.elem />}>
+              <Route path=":category" element={<MyAuction.elem />} />
+            </Route>
+            <Route path="/myservice/*" element={<MyService.elem />}>
+              <Route path=":category" element={<MyService.elem />} />
+            </Route>
+            <Route path="*" element={<NotFound.elem />} />
           </Routes>
         </CSSTransition>
       </TransitionGroup>
@@ -104,16 +115,14 @@ export const App = {
   }
 }
 
-const rootReducer = {
-  ...compReducers,
-  ...contReducers,
-  ...pageReducers,
-  head: Head.reducer,
-  app: App.reducer,
-};
-
 const rootStore = configureStore({
-  reducer: combineReducers(rootReducer)
+  reducer: combineReducers({
+    ...compReducers,
+    ...contReducers,
+    ...pageReducers,
+    head: Head.reducer,
+    app: App.reducer,
+  })
 });
 
 const root = createRoot(document.getElementById('app-root'));
