@@ -14,7 +14,7 @@ import { reducers as pageReducers } from '@pages';
 
 import { Home, NotFound, Search, MyAuction, MyService } from '@pages';
 import { appConfig } from '/configs/app.config';
-import { Head } from './Head';
+import Head, { HeadStore } from './Head';
 
 // scss
 import './styles/style.scss';
@@ -27,92 +27,91 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-  getCurrentPath: () => {
-    const pageConf = appConfig.pages;
-    let path = window.location.pathname.split('/')[1];
-    if (path === '') path = 'home';
-    if (!pageConf[path]) path = 'notfound';
-    return path;
+export const AppStore = {
+  reducer: store.reducer,
+  getState : () => {
+    return useSelector(state => state.head);
   },
-  getPageDepth: (currentPath=null, prev=0) => {
-    if (!currentPath) currentPath = App.actions.getCurrentPath();
-    const pageConf = appConfig.pages;
-    if (currentPath==='notfound' || !pageConf[currentPath]) { 
-      return prev+1;
-    } else {
-      return pageConf[currentPath].depth;
+  actions: {
+    ...store.actions,
+    getCurrentPath: () => {
+      const pageConf = appConfig.pages;
+      let path = window.location.pathname.split('/')[1];
+      if (path === '') path = 'home';
+      if (!pageConf[path]) path = 'notfound';
+      return path;
+    },
+    getPageDepth: (currentPath=null, prev=0) => {
+      if (!currentPath) currentPath = AppStore.actions.getCurrentPath();
+      const pageConf = appConfig.pages;
+      if (currentPath==='notfound' || !pageConf[currentPath]) { 
+        return prev+1;
+      } else {
+        return pageConf[currentPath].depth;
+      }
     }
   }
 }
 
-export const App = {
-  actions: actions,
-  reducer: store.reducer,
-  getState : () => {
-    return useSelector(state => state.app);
-  },
-  elem: () => {
-    let stack = useRef([0]);
-    const { getCurrentPath, getPageDepth } = App.actions;
-    const location = useLocation();
-    const pathname = location.pathname.split('/')[1];
+export default function App() {
+  let stack = useRef([0]);
+  const { getCurrentPath, getPageDepth } = AppStore.actions;
+  const location = useLocation();
+  const pathname = location.pathname.split('/')[1];
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-      if (pathname === '') {
-        stack.current = [0];
+  useEffect(() => {
+    if (pathname === '') {
+      stack.current = [0];
+    } else {
+      stack.current.push(getPageDepth(pathname, stack.current.at(-1)));
+    }
+  }, [pathname]);
+
+  const transitionProps = {
+    key: pathname,
+    classNames: "anim",
+    timeout: { enter: 350, exit: 350 },
+    onEnter: (node) => {
+      const lastStack = stack.current.at(-1);
+      const currentDepth = getPageDepth(getCurrentPath(), lastStack);
+      if (lastStack < currentDepth) {
+        node.className = 'slide anim-enter';
       } else {
-        stack.current.push(getPageDepth(pathname, stack.current.at(-1)));
+        node.className = 'fade anim-enter';
       }
-    }, [pathname]);
-
-    const transitionProps = {
-      key: pathname,
-      classNames: "anim",
-      timeout: { enter: 350, exit: 350 },
-      onEnter: (node) => {
-        const lastStack = stack.current.at(-1);
-        const currentDepth = getPageDepth(getCurrentPath(), lastStack);
-        if (lastStack < currentDepth) {
-          node.className = 'slide anim-enter';
-        } else {
-          node.className = 'fade anim-enter';
-        }
-      },
-      onExit: (node) => {
-        const lastStack = stack.current.at(-1);
-        const currentDepth = getPageDepth(getCurrentPath(), lastStack);
-        if (lastStack < currentDepth) {
-          node.className = 'fade';
-        } else {
-          node.className = 'slide';
-        }
+    },
+    onExit: (node) => {
+      const lastStack = stack.current.at(-1);
+      const currentDepth = getPageDepth(getCurrentPath(), lastStack);
+      if (lastStack < currentDepth) {
+        node.className = 'fade';
+      } else {
+        node.className = 'slide';
       }
     }
-    return (
-      <TransitionGroup className="transition-group">
-        <CSSTransition {...transitionProps}>
-          <Routes location={location}>
-            <Route path="/" element={<Home.elem />} />
-            <Route path="/search/*" element={<Search.elem />}>
-              <Route path=":category" element={<Search.elem />} />
-              <Route path=":category/:query" element={<Search.elem />} />
-            </Route>
-            <Route path="/myauction/*" element={<MyAuction.elem />}>
-              <Route path=":category" element={<MyAuction.elem />} />
-            </Route>
-            <Route path="/myservice/*" element={<MyService.elem />}>
-              <Route path=":category" element={<MyService.elem />} />
-            </Route>
-            <Route path="*" element={<NotFound.elem />} />
-          </Routes>
-        </CSSTransition>
-      </TransitionGroup>
-    )
   }
+  return (
+    <TransitionGroup className="transition-group">
+      <CSSTransition {...transitionProps}>
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/search/*" element={<Search.elem />}>
+            <Route path=":category" element={<Search.elem />} />
+            <Route path=":category/:query" element={<Search.elem />} />
+          </Route>
+          <Route path="/myauction/*" element={<MyAuction.elem />}>
+            <Route path=":category" element={<MyAuction.elem />} />
+          </Route>
+          <Route path="/myservice/*" element={<MyService.elem />}>
+            <Route path=":category" element={<MyService.elem />} />
+          </Route>
+          <Route path="*" element={<NotFound.elem />} />
+        </Routes>
+      </CSSTransition>
+    </TransitionGroup>
+  )
 }
 
 const rootStore = configureStore({
@@ -120,8 +119,8 @@ const rootStore = configureStore({
     ...compReducers,
     ...contReducers,
     ...pageReducers,
-    head: Head.reducer,
-    app: App.reducer,
+    head: HeadStore.reducer,
+    app: AppStore.reducer,
   })
 });
 
@@ -129,8 +128,8 @@ const root = createRoot(document.getElementById('app-root'));
 root.render(
   <Provider store={rootStore}>
     <BrowserRouter>
-      <Head.elem />
-      <App.elem />
+      <Head />
+      <App />
     </BrowserRouter>
   </Provider>
 );

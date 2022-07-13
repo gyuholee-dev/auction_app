@@ -18,38 +18,37 @@ const store = createSlice({
   }
 });
 
-const actions = {
-  ...store.actions,
-  setSiteTitle: () => {
-    return (dispatch, getState) => {
-      const { title, subTitle } = getState().head;
-      const siteTitle = `${title}${subTitle?' : '+subTitle:''}`;
-      document.head.querySelector('title').innerText = siteTitle;
-    }
-  }
-}
-
-export const Head = {
-  actions: actions,
+export const HeadStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.head);
   },
-  elem: () => {
-    const { title, subTitle, theme } = Head.getState();
-    const { setTitle, setSubTitle, setTheme, setSiteTitle } = Head.actions;
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(setSiteTitle());
-    }, [title, subTitle]);
-
-    useEffect(() => {
-      const themeClass = `theme-${theme}`;
-      document.body.className = themeClass;
-    }, [theme]);
-
-    return;
+  actions: {
+    ...store.actions,
+    setSiteTitle: () => {
+      return (dispatch, getState) => {
+        const { title, subTitle } = getState().head;
+        const siteTitle = `${title}${subTitle?' : '+subTitle:''}`;
+        document.head.querySelector('title').innerText = siteTitle;
+      }
+    }
   }
+}
+
+export default function Head() {
+  const { title, subTitle, theme } = HeadStore.getState();
+  const { setTitle, setSubTitle, setTheme, setSiteTitle } = HeadStore.actions;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSiteTitle());
+  }, [title, subTitle]);
+
+  useEffect(() => {
+    const themeClass = `theme-${theme}`;
+    document.body.className = themeClass;
+  }, [theme]);
+
+  return;
 }
 

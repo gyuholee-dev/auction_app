@@ -7,7 +7,7 @@ import {
   SideMenu,
 } from '@components';
 import { Header, Main, Footer } from '@containers';
-import { Head } from '/src/Head';
+import { HeadStore } from '/src/Head';
 
 const store = createSlice({
   name: 'home',
@@ -18,34 +18,33 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const Home = {
-  actions: actions,
+export const HomeStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.home);
   },
-  elem: () => {
-    const state = Home.getState();
-    const { setSubTitle } = Head.actions;
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(setSubTitle(''));
-    }, []);
-
-    return (
-      <div id='page-home' className='fade'>
-        <Dimmer.elem />
-        <SideMenu.elem />
-        <Header.elem {...state} />
-        <Main.elem {...state} />
-        <Footer.elem {...state} />
-      </div>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function Home() {
+  const state = HomeStore.getState();
+  const { setSubTitle } = HeadStore.actions;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSubTitle(''));
+  }, []);
+
+  return (
+    <div id='page-home' className='fade'>
+      <Dimmer.elem />
+      <SideMenu.elem />
+      <Header.elem {...state} />
+      <Main.elem {...state} />
+      <Footer.elem {...state} />
+    </div>
+  )
 }

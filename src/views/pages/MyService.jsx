@@ -4,7 +4,7 @@ import { useStore, useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 
 import { Header, Main, Footer } from '@containers';
-import { Head } from '/src/Head';
+import { HeadStore } from '/src/Head';
 
 const store = createSlice({
   name: 'myservice',
@@ -28,7 +28,7 @@ export const MyService = {
   elem: () => {
     const state = MyService.getState();
     const { page, title } = state;
-    const { setSubTitle } = Head.actions;
+    const { setSubTitle } = HeadStore.actions;
 
     const dispatch = useDispatch();
 
