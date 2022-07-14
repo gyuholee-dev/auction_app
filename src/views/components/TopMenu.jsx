@@ -4,8 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useStore, useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 
-import { SideMenu } from '@components';
-import { App } from '@app';
+import { SideMenuStore } from './SideMenu';
 
 const ButtonTopMenu = (props) => {
   const {
@@ -60,61 +59,60 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const TopMenu = {
-  actions: actions,
+export const TopMenuStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.topMenu);
   },
-  elem: (props) => {
-    const { page, title } = props;
-    const { category = null, query = null } = useParams();
-    const { toggleOpen } = SideMenu.actions;
-    const dispatch = useDispatch();
-
-    const ButtonLeft = () => {
-      switch (page) {
-        case 'home':
-          return <ButtonTopMenu type='menu' onClick={()=>dispatch(toggleOpen())} />
-        case 'notfound':
-          return <ButtonTopMenu type='back'/>
-        default:
-          return <ButtonTopMenu type='back' link={'/'}/>
-      }
-    }
-    const CenterBlock = () => {
-      switch (page) {
-        case 'search':
-          return (
-            <div className="seachbox">
-              <input type="text" name="search" placeholder="검색어를 입력하세요" autoComplete="off" defaultValue={query}/>
-            </div>
-          );
-        default:
-          return <div className={`title ${(page==='home')?'center':''}`}>{title}</div>
-      }
-    }
-    const ButtonRight = () => {
-      switch (page) {
-        case 'home':
-          return <ButtonTopMenu type='search' />
-        case 'myauction':
-          return <ButtonTopMenu type='notify' />
-        case 'myservice':
-          return <ButtonTopMenu type='setting' />
-      }
-    }
-
-    return (
-      <nav id="topmenu" className="menu top">
-        <ButtonLeft />
-        <CenterBlock />
-        <ButtonRight />
-      </nav>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function TopMenu(props) {
+  const { page, title } = props;
+  const { category = null, query = null } = useParams();
+  const { toggleOpen } = SideMenuStore.actions;
+  const dispatch = useDispatch();
+
+  const ButtonLeft = () => {
+    switch (page) {
+      case 'home':
+        return <ButtonTopMenu type='menu' onClick={()=>dispatch(toggleOpen())} />
+      case 'notfound':
+        return <ButtonTopMenu type='back'/>
+      default:
+        return <ButtonTopMenu type='back' link={'/'}/>
+    }
+  }
+  const CenterBlock = () => {
+    switch (page) {
+      case 'search':
+        return (
+          <div className="seachbox">
+            <input type="text" name="search" placeholder="검색어를 입력하세요" autoComplete="off" defaultValue={query}/>
+          </div>
+        );
+      default:
+        return <div className={`title ${(page==='home')?'center':''}`}>{title}</div>
+    }
+  }
+  const ButtonRight = () => {
+    switch (page) {
+      case 'home':
+        return <ButtonTopMenu type='search' />
+      case 'myauction':
+        return <ButtonTopMenu type='notify' />
+      case 'myservice':
+        return <ButtonTopMenu type='setting' />
+    }
+  }
+
+  return (
+    <nav id="topmenu" className="menu top">
+      <ButtonLeft />
+      <CenterBlock />
+      <ButtonRight />
+    </nav>
+  )
 }

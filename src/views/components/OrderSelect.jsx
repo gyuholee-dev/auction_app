@@ -8,29 +8,28 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const OrderSelect = {
-  actions: actions,
+export const OrderSelectStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.orderSelect);
   },
-  elem: () => {
-    return (
-      <div className="order">
-        <select name="">
-          <option value="1">입찰수</option>
-        </select>
-        <select name="">
-          <option value="1">마감일</option>
-        </select>
-        <select name="">
-          <option value="1">직거래</option>
-        </select>
-      </div>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function OrderSelect(props) {
+  return (
+    <div className="order">
+      <select name="">
+        <option value="1">입찰수</option>
+      </select>
+      <select name="">
+        <option value="1">마감일</option>
+      </select>
+      <select name="">
+        <option value="1">직거래</option>
+      </select>
+    </div>
+  )
 }

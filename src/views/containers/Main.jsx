@@ -83,22 +83,22 @@ export default function Main(props) {
     case 'home':
       return (
         <main>
-          <ImgSlide.elem />
-          <ItemList.elem />
+          <ImgSlide />
+          <ItemList />
         </main>
       )
     case 'search':
     case 'myauction':
       if (page === 'search' && !category && !query) {
-        return (<main className='slide'><SearchHistory.elem /></main>);
+        return (<main className='slide'><SearchHistory /></main>);
       } else {
         return (
           <TransitionGroup className="transition-group" appear={true}>
             <CSSTransition {...transitionProps}>
               <Routes>
-                <Route path="/" element={(<main><ItemList.elem /></main>)} />
-                <Route path="/:category" element={(<main><ItemList.elem /></main>)} />
-                <Route path="/:category/:query" element={(<main><ItemList.elem /></main>)} />
+                <Route path="/" element={(<main><ItemList /></main>)} />
+                <Route path="/:category" element={(<main><ItemList /></main>)} />
+                <Route path="/:category/:query" element={(<main><ItemList /></main>)} />
               </Routes>
             </CSSTransition>
           </TransitionGroup>
@@ -107,9 +107,9 @@ export default function Main(props) {
     case 'myservice':
       return (
         <main>
-          <MemberInfo.elem />
-          <PointBalance.elem />
-          <TrxHistory.elem />
+          <MemberInfo />
+          <PointBalance />
+          <TrxHistory />
         </main>
       )
   }

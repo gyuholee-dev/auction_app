@@ -40,8 +40,8 @@ export default function Home() {
 
   return (
     <div id='page-home' className='fade'>
-      <Dimmer.elem />
-      <SideMenu.elem />
+      <Dimmer />
+      <SideMenu />
       <Header {...state} />
       <Main {...state} />
       <Footer {...state} />

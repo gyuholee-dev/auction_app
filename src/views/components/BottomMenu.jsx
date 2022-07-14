@@ -9,41 +9,40 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const BottomMenu = {
-  actions: actions,
+export const BottomMenuStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.bottomMenu);
   },
-  elem: () => {
-    const navigate = useNavigate();
-    return (
-      <nav id="bottommenu" className="menu bottom">
-        <button className="btn none"
-          onClick={() => navigate('/')}>
-          <i className="xi-home-o"></i>
-          <span>홈</span>
-        </button>
-        <button className="btn none"
-          onClick={() => navigate('/search/1')}>
-          <i className="xi-document"></i>
-          <span>카테고리</span>
-        </button>
-        <button className="btn none"
-          onClick={() => navigate('/myauction/1')}>
-          <i className="xi-gift-o"></i>
-          <span>나의 경매</span>
-        </button>
-        <button className="btn none"
-          onClick={() => navigate('/myservice')}>
-          <i className="xi-user-o"></i>
-          <span>나의 슈퍼레어</span>
-        </button>
-      </nav>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function BottomMenu(props) {
+  const navigate = useNavigate();
+  return (
+    <nav id="bottommenu" className="menu bottom">
+      <button className="btn none"
+        onClick={() => navigate('/')}>
+        <i className="xi-home-o"></i>
+        <span>홈</span>
+      </button>
+      <button className="btn none"
+        onClick={() => navigate('/search/1')}>
+        <i className="xi-document"></i>
+        <span>카테고리</span>
+      </button>
+      <button className="btn none"
+        onClick={() => navigate('/myauction/1')}>
+        <i className="xi-gift-o"></i>
+        <span>나의 경매</span>
+      </button>
+      <button className="btn none"
+        onClick={() => navigate('/myservice')}>
+        <i className="xi-user-o"></i>
+        <span>나의 슈퍼레어</span>
+      </button>
+    </nav>
+  )
 }

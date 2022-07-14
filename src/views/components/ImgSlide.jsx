@@ -7,23 +7,22 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const ImgSlide = {
-  actions: actions,
+export const ImgSlideStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.imgSlide);
   },
-  elem: () => {
-    return (
-      <section id="imgslide">
-        <div className="imgs">
-          <img src="/images/Eab45nOX0AAxAQm.jpeg" alt="PS5" />
-        </div>
-      </section>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function ImgSlide(props) {
+  return (
+    <section id="imgslide">
+      <div className="imgs">
+        <img src="/images/Eab45nOX0AAxAQm.jpeg" alt="PS5" />
+      </div>
+    </section>
+  )
 }

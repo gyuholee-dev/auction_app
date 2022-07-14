@@ -13,29 +13,32 @@ const store = createSlice({
   },
 });
 
-export const SideMenu = {
-  actions: store.actions,
+export const SideMenuStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.sideMenu);
   },
-  elem: () => {
-    const dispatch = useDispatch();
-    const state = SideMenu.getState();
-    const { toggleOpen } = SideMenu.actions;
-
-    const menuClass = state.open?'open':'close';
-    return (
-      <aside>
-        <nav id="sidemenu" className={menuClass}>
-          <div className="header">
-            <div className="user"></div>
-            <button className="btn none close" onClick={()=>dispatch(toggleOpen())}>
-              <i className="xi-close"></i>
-            </button>
-          </div>
-        </nav>
-      </aside>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function SideMenu(props) {
+  const dispatch = useDispatch();
+  const state = SideMenuStore.getState();
+  const { toggleOpen } = SideMenuStore.actions;
+
+  const menuClass = state.open?'open':'close';
+  return (
+    <aside>
+      <nav id="sidemenu" className={menuClass}>
+        <div className="header">
+          <div className="user"></div>
+          <button className="btn none close" onClick={()=>dispatch(toggleOpen())}>
+            <i className="xi-close"></i>
+          </button>
+        </div>
+      </nav>
+    </aside>
+  )
 }

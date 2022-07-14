@@ -63,22 +63,21 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const SearchHistory = {
-  actions: actions,
+export const SearchHistoryStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.searchHistory);
   },
-  elem: (props) => {
-    return (
-      <>
-        <BestQuery />
-        <History />
-      </>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function SearchHistory(props) {
+  return (
+    <>
+      <BestQuery />
+      <History />
+    </>
+  )
 }

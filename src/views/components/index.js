@@ -1,33 +1,33 @@
-import { Dimmer } from './Dimmer.jsx';
-import { SideMenu } from './SideMenu.jsx';
-import { TopMenu } from './TopMenu.jsx';
-import { BottomMenu } from './BottomMenu.jsx';
-import { CategoryTab } from './CategoryTab.jsx';
-import { ImgSlide } from './ImgSlide.jsx';
-import { OrderSelect } from './OrderSelect.jsx';
-import { ItemList } from './ItemList.jsx';
-import { SearchHistory } from './SearchHistory.jsx';
-import { MemberInfo } from './MemberInfo.jsx';
-import { PointBalance } from './PointBalance.jsx';
-import { TrxHistory } from './TrxHistory.jsx';
-import { NoticeSlide } from './NoticeSlide.jsx';
-import { InfoMenu } from './InfoMenu.jsx';
+import Dimmer, { DimmerStore } from './Dimmer.jsx';
+import SideMenu, { SideMenuStore } from './SideMenu.jsx';
+import TopMenu, { TopMenuStore } from './TopMenu.jsx';
+import BottomMenu, { BottomMenuStore } from './BottomMenu.jsx';
+import CategoryTab, { CategoryTabStore } from './CategoryTab.jsx';
+import ImgSlide, { ImgSlideStore } from './ImgSlide.jsx';
+import OrderSelect, { OrderSelectStore } from './OrderSelect.jsx';
+import ItemList, { ItemListStore } from './ItemList.jsx';
+import SearchHistory, { SearchHistoryStore } from './SearchHistory.jsx';
+import MemberInfo, { MemberInfoStore } from './MemberInfo.jsx';
+import PointBalance, { PointBalanceStore } from './PointBalance.jsx';
+import TrxHistory, { TrxHistoryStore } from './TrxHistory.jsx';
+import NoticeSlide, { NoticeSlideStore } from './NoticeSlide.jsx';
+import InfoMenu, { InfoMenuStore } from './InfoMenu.jsx';
 
 export const reducers = {
-  dimmer: Dimmer.reducer,
-  sideMenu: SideMenu.reducer,
-  topMenu: TopMenu.reducer,
-  bottomMenu: BottomMenu.reducer,
-  categoryTab : CategoryTab.reducer,
-  imgSlide : ImgSlide.reducer,
-  orderSelect : OrderSelect.reducer,
-  itemList : ItemList.reducer,
-  searchHistory : SearchHistory.reducer,
-  memberInfo : MemberInfo.reducer,
-  pointBalance : PointBalance.reducer,
-  trxHistory : TrxHistory.reducer,
-  noticeSlide : NoticeSlide.reducer,
-  infoMenu : InfoMenu.reducer,
+  dimmer: DimmerStore.reducer,
+  sideMenu: SideMenuStore.reducer,
+  topMenu: TopMenuStore.reducer,
+  bottomMenu: BottomMenuStore.reducer,
+  categoryTab : CategoryTabStore.reducer,
+  imgSlide : ImgSlideStore.reducer,
+  orderSelect : OrderSelectStore.reducer,
+  itemList : ItemListStore.reducer,
+  searchHistory : SearchHistoryStore.reducer,
+  memberInfo : MemberInfoStore.reducer,
+  pointBalance : PointBalanceStore.reducer,
+  trxHistory : TrxHistoryStore.reducer,
+  noticeSlide : NoticeSlideStore.reducer,
+  infoMenu : InfoMenuStore.reducer,
 }
 export {
   Dimmer,

@@ -28,9 +28,9 @@ export default function Footer(props) {
   const { page } = props;
   return (
     <footer>
-      { page === 'home' && <BottomMenu.elem /> }
-      { page === 'myservice' && <NoticeSlide.elem /> }
-      { page === 'myservice' && <InfoMenu.elem /> }
+      { page === 'home' && <BottomMenu /> }
+      { page === 'myservice' && <NoticeSlide /> }
+      { page === 'myservice' && <InfoMenu /> }
     </footer>
   )
 }

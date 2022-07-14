@@ -30,9 +30,9 @@ export default function Header(props) {
 
   return (
     <header>
-      <TopMenu.elem {...props} />
-      {((page === 'search') && (category || query)) && <CategoryTab.elem page={page}/>}
-      {(page === 'myauction') && <CategoryTab.elem page={page}/>}
+      <TopMenu {...props} />
+      {((page === 'search') && (category || query)) && <CategoryTab page={page}/>}
+      {(page === 'myauction') && <CategoryTab page={page}/>}
     </header>
   )
 }
