@@ -123,7 +123,7 @@ export default (env, argv) => {
     },
     output: {
       path: path.resolve('public'),
-      publicPath: '/',
+      publicPath: '/auction',
       filename: isProd ? 'scripts/bundle.min.js' : 'scripts/bundle.js',
     }
   }
