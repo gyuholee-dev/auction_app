@@ -9,35 +9,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 export default (env, argv) => {
   const watch = (env && env.WEBPACK_WATCH) ? (env.WEBPACK_WATCH === 'true') : false; // true | false
   const mode = (argv && argv.mode) ? argv.mode : 'development'; // "production" | "development" | "none"
-  const filename = (mode === 'production') ? 'scripts/bundle.min.js' : 'scripts/bundle.js';
-  const distDir = path.resolve('public');
-
-  const entry = ['./src/App'];
-
-  const plugins = [
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: [
-        '**/*',
-        '!static-files*',
-        '!images/**',
-      ],
-    }),
-    new HtmlWebpackPlugin({
-      minify: {
-        collapseWhitespace: true
-      },
-      hash: true,
-      template: './src/views/template.html',
-      // filename: 'main.html', // 기본값 index.html
-    })
-  ];
-
-  if(mode === 'production') {
-    plugins.push(new MiniCssExtractPlugin({
-      filename: 'styles/style.min.css',
-    }));
-  }
-  const styleLoader = (mode === 'production') ? MiniCssExtractPlugin.loader : 'style-loader';
+  const isDev = (mode === 'development');
+  const isProd = (mode === 'production');
 
   return {
     mode: mode,
@@ -56,17 +29,36 @@ export default (env, argv) => {
       // static: false,
       historyApiFallback: true,
       static: { 
-        directory: distDir, 
+        directory: path.resolve('public'), 
         publicPath: '/'
       }
     },
-    entry: entry,
+    entry: ['./src/App'],
     resolve: {
     	extensions: [ '.js', '.jsx'],
       modules: [path.resolve('node_modules'), 'node_modules'],
     },
-    devtool: (mode === 'development') ? 'inline-source-map':'cheap-module-source-map',
-    plugins: plugins,
+    devtool: isDev ? 'inline-source-map':'cheap-module-source-map',
+    plugins: [
+      isProd && new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: [
+          '**/*',
+          '!static-files*',
+          '!images/**',
+        ],
+      }),
+      isProd && new MiniCssExtractPlugin({
+        filename: 'styles/bundle.min.css',
+      }),
+      new HtmlWebpackPlugin({
+        minify: {
+          collapseWhitespace: true
+        },
+        hash: true,
+        template: './src/views/template.html',
+        // filename: 'main.html', // 기본값 index.html
+      }),
+    ].filter(Boolean),
     module: {
       rules: [
         // jsx 로더
@@ -86,7 +78,7 @@ export default (env, argv) => {
         {
           test: /\.s[ac]ss$/i,
           use: [ 
-            styleLoader,
+            isProd ? MiniCssExtractPlugin.loader : 'style-loader',
             "css-loader",
             "sass-loader",
           ],
@@ -130,9 +122,9 @@ export default (env, argv) => {
       }
     },
     output: {
-      path: distDir,
+      path: path.resolve('public'),
       publicPath: '/',
-      filename: filename,
+      filename: isProd ? 'scripts/bundle.min.js' : 'scripts/bundle.js',
     }
   }
 }
