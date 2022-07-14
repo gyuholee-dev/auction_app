@@ -26,7 +26,7 @@ export const DimmerStore = {
     ...store.actions,
     toggleDimm: () => {
       return async(dispatch, getState) => {
-        const { toggleShow, setClass } = Dimmer.actions;
+        const { toggleShow, setClass } = DimmerStore.actions;
         dispatch(toggleShow());
         const { dimmer } = getState();
         if (dimmer.show === true) {
