@@ -38,9 +38,9 @@ export default function MyService() {
 
   return (
     <div id='page-myservice' className='slide'>
-      <Header.elem {...state} />
-      <Main.elem {...state} />
-      <Footer.elem {...state} />
+      <Header {...state} />
+      <Main {...state} />
+      <Footer {...state} />
     </div>
   )
 }

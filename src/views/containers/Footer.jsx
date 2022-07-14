@@ -7,7 +7,6 @@ import {
   NoticeSlide,
   InfoMenu,
 } from '@components';
-import { App } from '@app';
 
 const store = createSlice({
   name: 'footer',
@@ -15,24 +14,23 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const Footer = {
-  actions: actions,
+export const FooterStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.footer);
   },
-  elem: (props) => {
-    const { page } = props;
-    return (
-      <footer>
-        { page === 'home' && <BottomMenu.elem /> }
-        { page === 'myservice' && <NoticeSlide.elem /> }
-        { page === 'myservice' && <InfoMenu.elem /> }
-      </footer>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function Footer(props) {
+  const { page } = props;
+  return (
+    <footer>
+      { page === 'home' && <BottomMenu.elem /> }
+      { page === 'myservice' && <NoticeSlide.elem /> }
+      { page === 'myservice' && <InfoMenu.elem /> }
+    </footer>
+  )
 }

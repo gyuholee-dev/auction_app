@@ -24,94 +24,93 @@ const store = createSlice({
   }
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const Main = {
-  actions: actions,
+export const MainStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.main);
   },
-  elem: (props) => {
-    const { page } = props;
-    const { prevCat } = Main.getState();
-    const { setPrevCat } = Main.actions;
-    const { category = null, query = null } = useParams();
+  actions: {
+    ...store.actions,
+  }
+}
 
-    const location = useLocation();
-    const pathname = '/' + location.pathname.split('/')[2];
+export default function Main(props) {
+  const { page } = props;
+  const { prevCat } = MainStore.getState();
+  const { setPrevCat } = MainStore.actions;
+  const { category = null, query = null } = useParams();
 
-    const dispatch = useDispatch();
+  const location = useLocation();
+  const pathname = '/' + location.pathname.split('/')[2];
 
-    const transitionProps = {
-      key: pathname,
-      classNames: "anim",
-      timeout: {
-        appear: 0,
-        enter: 350,
-        exit: 350,
-      },
-      onEnter: (node) => {
-        if (!node) return;
-        const currentCat = window.location.pathname.split('/')[2];
-        if (!prevCat || !currentCat) { node.className = 'anim-stop'; return; }
-        if (prevCat < category) {
-          node.className = 'slide-in anim-enter';
-        } else {
-          node.className = 'slide-out anim-enter';
-        }
-      },
-      onExit: (node) => {
-        if (!node) return;
-        const currentCat = window.location.pathname.split('/')[2];
-        if (!currentCat) { node.className = 'anim-stop'; return; }
-        if (prevCat < currentCat) {
-          node.className = 'slide-in anim-exit';
-        } else {
-          node.className = 'slide-out anim-exit';
-        }
+  const dispatch = useDispatch();
+
+  const transitionProps = {
+    key: pathname,
+    classNames: "anim",
+    timeout: {
+      appear: 0,
+      enter: 350,
+      exit: 350,
+    },
+    onEnter: (node) => {
+      if (!node) return;
+      const currentCat = window.location.pathname.split('/')[2];
+      if (!prevCat || !currentCat) { node.className = 'anim-stop'; return; }
+      if (prevCat < category) {
+        node.className = 'slide-in anim-enter';
+      } else {
+        node.className = 'slide-out anim-enter';
+      }
+    },
+    onExit: (node) => {
+      if (!node) return;
+      const currentCat = window.location.pathname.split('/')[2];
+      if (!currentCat) { node.className = 'anim-stop'; return; }
+      if (prevCat < currentCat) {
+        node.className = 'slide-in anim-exit';
+      } else {
+        node.className = 'slide-out anim-exit';
       }
     }
+  }
 
-    useEffect(() => {
-      dispatch(setPrevCat(category));
-    }, [category]);
+  useEffect(() => {
+    dispatch(setPrevCat(category));
+  }, [category]);
 
-    switch (page) {
-      case 'home':
+  switch (page) {
+    case 'home':
+      return (
+        <main>
+          <ImgSlide.elem />
+          <ItemList.elem />
+        </main>
+      )
+    case 'search':
+    case 'myauction':
+      if (page === 'search' && !category && !query) {
+        return (<main className='slide'><SearchHistory.elem /></main>);
+      } else {
         return (
-          <main>
-            <ImgSlide.elem />
-            <ItemList.elem />
-          </main>
+          <TransitionGroup className="transition-group" appear={true}>
+            <CSSTransition {...transitionProps}>
+              <Routes>
+                <Route path="/" element={(<main><ItemList.elem /></main>)} />
+                <Route path="/:category" element={(<main><ItemList.elem /></main>)} />
+                <Route path="/:category/:query" element={(<main><ItemList.elem /></main>)} />
+              </Routes>
+            </CSSTransition>
+          </TransitionGroup>
         )
-      case 'search':
-      case 'myauction':
-        if (page === 'search' && !category && !query) {
-          return (<main className='slide'><SearchHistory.elem /></main>);
-        } else {
-          return (
-            <TransitionGroup className="transition-group" appear={true}>
-              <CSSTransition {...transitionProps}>
-                <Routes>
-                  <Route path="/" element={(<main><ItemList.elem /></main>)} />
-                  <Route path="/:category" element={(<main><ItemList.elem /></main>)} />
-                  <Route path="/:category/:query" element={(<main><ItemList.elem /></main>)} />
-                </Routes>
-              </CSSTransition>
-            </TransitionGroup>
-          )
-        }
-      case 'myservice':
-        return (
-          <main>
-            <MemberInfo.elem />
-            <PointBalance.elem />
-            <TrxHistory.elem />
-          </main>
-        )
-    }
+      }
+    case 'myservice':
+      return (
+        <main>
+          <MemberInfo.elem />
+          <PointBalance.elem />
+          <TrxHistory.elem />
+        </main>
+      )
   }
 }

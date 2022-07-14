@@ -14,26 +14,25 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const Header = {
-  actions: actions,
+export const HeaderStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.header);
   },
-  elem: (props) => {
-    const { page } = props;
-    const { category = null, query = null } = useParams();
-
-    return (
-      <header>
-        <TopMenu.elem {...props} />
-        {((page === 'search') && (category || query)) && <CategoryTab.elem page={page}/>}
-        {(page === 'myauction') && <CategoryTab.elem page={page}/>}
-      </header>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function Header(props) {
+  const { page } = props;
+  const { category = null, query = null } = useParams();
+
+  return (
+    <header>
+      <TopMenu.elem {...props} />
+      {((page === 'search') && (category || query)) && <CategoryTab.elem page={page}/>}
+      {(page === 'myauction') && <CategoryTab.elem page={page}/>}
+    </header>
+  )
 }

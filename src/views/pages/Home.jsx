@@ -42,9 +42,9 @@ export default function Home() {
     <div id='page-home' className='fade'>
       <Dimmer.elem />
       <SideMenu.elem />
-      <Header.elem {...state} />
-      <Main.elem {...state} />
-      <Footer.elem {...state} />
+      <Header {...state} />
+      <Main {...state} />
+      <Footer {...state} />
     </div>
   )
 }

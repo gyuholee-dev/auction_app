@@ -50,9 +50,9 @@ export default function Search() {
   const pageId = (!category && !query)?'page-search':'page-search-result';
   return (
     <div id={pageId} className='slide'>
-      <Header.elem {...state} />
-      <Main.elem {...state} />
-      <Footer.elem {...state} />
+      <Header {...state} />
+      <Main {...state} />
+      <Footer {...state} />
     </div>
   )
 }

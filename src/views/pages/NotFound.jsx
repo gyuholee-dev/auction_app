@@ -42,14 +42,14 @@ export default function NotFound() {
 
   return (
     <div id='page-notfound' className='slide'>
-      <Header.elem {...state} />
+      <Header {...state} />
       <main>
         <section id="notfound">
           <p>{message}</p>
           <img src="images/cording_cat.gif" />
         </section>
       </main>
-      <Footer.elem {...state} />
+      <Footer {...state} />
     </div>
   )
 }
