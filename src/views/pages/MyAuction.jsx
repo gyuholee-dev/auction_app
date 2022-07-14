@@ -18,38 +18,37 @@ const store = createSlice({
   }
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const MyAuction = {
-  actions: actions,
+export const MyAuctionStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.myauction);
   },
-  elem: () => {
-    const state = MyAuction.getState();
-    const { page, title } = state;
-    const { setSubTitle } = HeadStore.actions;
-    const { setCategory } = MyAuction.actions;
-    const { category = null } = useParams();
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(setSubTitle(title));
-    }, []);
-    useEffect(() => {
-      dispatch(setCategory(category));
-    }, [category]);
-
-    return (
-      <div id='page-myauction' className='slide'>
-        <Header.elem {...state} />
-        <Main.elem {...state} />
-        <Footer.elem {...state} />
-      </div>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function MyAuction() {
+  const state = MyAuctionStore.getState();
+  const { page, title } = state;
+  const { setSubTitle } = HeadStore.actions;
+  const { setCategory } = MyAuctionStore.actions;
+  const { category = null } = useParams();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSubTitle(title));
+  }, []);
+  useEffect(() => {
+    dispatch(setCategory(category));
+  }, [category]);
+
+  return (
+    <div id='page-myauction' className='slide'>
+      <Header.elem {...state} />
+      <Main.elem {...state} />
+      <Footer.elem {...state} />
+    </div>
+  )
 }

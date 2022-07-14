@@ -19,34 +19,37 @@ const actions = {
   ...store.actions,
 }
 
-export const NotFound = {
-  actions: actions,
+export const NotFoundStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.notfound);
   },
-  elem: () => {
-    const state = NotFound.getState();
-    const { page, title, message } = state;
-    const { setSubTitle } = HeadStore.actions;
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(setSubTitle(title));
-    }, []);
-
-    return (
-      <div id='page-notfound' className='slide'>
-        <Header.elem {...state} />
-        <main>
-          <section id="notfound">
-            <p>{message}</p>
-            <img src="images/cording_cat.gif" />
-          </section>
-        </main>
-        <Footer.elem {...state} />
-      </div>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function NotFound() {
+  const state = NotFoundStore.getState();
+  const { page, title, message } = state;
+  const { setSubTitle } = HeadStore.actions;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSubTitle(title));
+  }, []);
+
+  return (
+    <div id='page-notfound' className='slide'>
+      <Header.elem {...state} />
+      <main>
+        <section id="notfound">
+          <p>{message}</p>
+          <img src="images/cording_cat.gif" />
+        </section>
+      </main>
+      <Footer.elem {...state} />
+    </div>
+  )
 }

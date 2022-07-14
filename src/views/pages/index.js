@@ -1,15 +1,15 @@
 import Home, { HomeStore } from './Home.jsx';
-import { NotFound } from './NotFound.jsx';
-import { Search } from './Search.jsx';
-import { MyAuction } from './MyAuction.jsx';
-import { MyService } from './MyService.jsx';
+import NotFound, { NotFoundStore } from './NotFound.jsx';
+import Search, { SearchStore } from './Search.jsx';
+import MyAuction, { MyAuctionStore } from './MyAuction.jsx';
+import MyService, { MyServiceStore } from './MyService.jsx';
 
 export const reducers = {
   home: HomeStore.reducer,
-  notfound: NotFound.reducer,
-  search: Search.reducer,
-  myauction: MyAuction.reducer,
-  myservice: MyService.reducer,
+  notfound: NotFoundStore.reducer,
+  search: SearchStore.reducer,
+  myauction: MyAuctionStore.reducer,
+  myservice: MyServiceStore.reducer,
 }
 export {
   Home,

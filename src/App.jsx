@@ -97,17 +97,17 @@ export default function App() {
       <CSSTransition {...transitionProps}>
         <Routes location={location}>
           <Route path="/" element={<Home />} />
-          <Route path="/search/*" element={<Search.elem />}>
-            <Route path=":category" element={<Search.elem />} />
-            <Route path=":category/:query" element={<Search.elem />} />
+          <Route path="/search/*" element={<Search />}>
+            <Route path=":category" element={<Search />} />
+            <Route path=":category/:query" element={<Search />} />
           </Route>
-          <Route path="/myauction/*" element={<MyAuction.elem />}>
-            <Route path=":category" element={<MyAuction.elem />} />
+          <Route path="/myauction/*" element={<MyAuction />}>
+            <Route path=":category" element={<MyAuction />} />
           </Route>
-          <Route path="/myservice/*" element={<MyService.elem />}>
-            <Route path=":category" element={<MyService.elem />} />
+          <Route path="/myservice/*" element={<MyService />}>
+            <Route path=":category" element={<MyService />} />
           </Route>
-          <Route path="*" element={<NotFound.elem />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </CSSTransition>
     </TransitionGroup>

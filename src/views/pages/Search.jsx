@@ -20,40 +20,39 @@ const store = createSlice({
   }
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const Search = {
-  actions: actions,
+export const SearchStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.search);
   },
-  elem: () => {
-    const state = Search.getState();
-    const { page, title } = state;
-    const { setSubTitle } = HeadStore.actions;
-    const { setCategory, setQuery } = Search.actions;
-    const { category = null, query = null } = useParams();
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(setSubTitle(title));
-    }, []);
-    useEffect(() => {
-      dispatch(setCategory(category));
-      dispatch(setQuery(query));
-    }, [category, query]);
-
-    const pageId = (!category && !query)?'page-search':'page-search-result';
-    return (
-      <div id={pageId} className='slide'>
-        <Header.elem {...state} />
-        <Main.elem {...state} />
-        <Footer.elem {...state} />
-      </div>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function Search() {
+  const state = SearchStore.getState();
+  const { page, title } = state;
+  const { setSubTitle } = HeadStore.actions;
+  const { setCategory, setQuery } = SearchStore.actions;
+  const { category = null, query = null } = useParams();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSubTitle(title));
+  }, []);
+  useEffect(() => {
+    dispatch(setCategory(category));
+    dispatch(setQuery(query));
+  }, [category, query]);
+
+  const pageId = (!category && !query)?'page-search':'page-search-result';
+  return (
+    <div id={pageId} className='slide'>
+      <Header.elem {...state} />
+      <Main.elem {...state} />
+      <Footer.elem {...state} />
+    </div>
+  )
 }

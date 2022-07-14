@@ -15,33 +15,32 @@ const store = createSlice({
   reducers: {}
 });
 
-const actions = {
-  ...store.actions,
-}
-
-export const MyService = {
-  actions: actions,
+export const MyServiceStore = {
   reducer: store.reducer,
   getState : () => {
     return useSelector(state => state.myservice);
   },
-  elem: () => {
-    const state = MyService.getState();
-    const { page, title } = state;
-    const { setSubTitle } = HeadStore.actions;
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(setSubTitle(title));
-    }, []);
-
-    return (
-      <div id='page-myservice' className='slide'>
-        <Header.elem {...state} />
-        <Main.elem {...state} />
-        <Footer.elem {...state} />
-      </div>
-    )
+  actions: {
+    ...store.actions,
   }
+}
+
+export default function MyService() {
+  const state = MyServiceStore.getState();
+  const { page, title } = state;
+  const { setSubTitle } = HeadStore.actions;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSubTitle(title));
+  }, []);
+
+  return (
+    <div id='page-myservice' className='slide'>
+      <Header.elem {...state} />
+      <Main.elem {...state} />
+      <Footer.elem {...state} />
+    </div>
+  )
 }
