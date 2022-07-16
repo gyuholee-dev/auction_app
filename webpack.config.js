@@ -50,13 +50,18 @@ export default (env, argv) => {
       isProd && new MiniCssExtractPlugin({
         filename: 'styles/bundle.min.css',
       }),
-      new HtmlWebpackPlugin({
+      isDev && new HtmlWebpackPlugin({
         minify: {
           collapseWhitespace: true
         },
         hash: true,
-        template: './src/views/template.html',
-        // filename: 'main.html', // 기본값 index.html
+        // filename: 'index.html',
+        // template: './src/views/template.html',
+        template: './src/views/template.ejs',
+        templateParameters: {
+          isProd: false,
+          isDesktop: true,
+        },
       }),
     ].filter(Boolean),
     module: {

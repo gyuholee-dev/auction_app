@@ -11,7 +11,23 @@ export default class Router {
     publicPath = path.resolve(paths.pub);
   }
 
+  detectDevice (request) {
+    const device = request.device;
+    return {
+      isDesktop: device.type === 'desktop',
+      isPhone: device.type === 'phone',
+      isTablet: device.type === 'tablet',
+      isMobile: device.type === 'phone' || device.type === 'tablet',
+      isTv: device.type === 'tv',
+      isBot: device.type === 'bot',
+      isCar: device.type === 'car',
+      deviceType: device.type,
+      deviceName: device.name,
+    }
+  }
+
   async route (request, response) {
+    const device = this.detectDevice(request);
     const method = request.method;
     const urls = url.parse(request.url, true);
     const paths = urls.pathname;
@@ -32,16 +48,25 @@ export default class Router {
     if (method === 'GET') { 
 
       // HTML 도큐먼트
-      let document = 'index.html';
+      // let document = 'index.html';
+      // const query = urls.query;
+      // switch(pathname) {
+      //   // case '/' || '/main':
+      //   //   document = 'index.html';
+      //   //   break;
+      //   default:
+      //     document = 'index.html';
+      // }
+      // response.sendFile(path.join(publicPath, document));
+
+      // EJS 도큐먼트
+      let document = 'template.ejs';
+      let data = {
+        ...device,
+        isProd: true,
+      };
       const query = urls.query;
-      switch(pathname) {
-        // case '/' || '/main':
-        //   document = 'index.html';
-        //   break;
-        default:
-          document = 'index.html';
-      }
-      response.sendFile(path.join(publicPath, document));
+      response.render(document, data);
 
     } else if (method === 'POST') {
 

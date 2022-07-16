@@ -1,5 +1,6 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
+import device from 'express-device';
 import path from 'path';
 
 // import Database from './Database.js';
@@ -20,14 +21,25 @@ export default class Server {
     const config = this.config;
     const paths = config.paths;
     const publicPath = path.resolve(paths.pub);
+    const viewsPath = path.resolve(paths.src, paths.view);
+    
+    this.server.set( // 뷰 엔진, ejs
+      'view engine', 'ejs', 
+    );
+    this.server.set( // 뷰 파일 경로
+      'views', viewsPath,
+    );
+    this.server.set( // 퍼블릭 파일 경로
+      'public', publicPath,
+    );
 
     this.server.use( // 미들웨어
       express.urlencoded({extended:false}),
     );
-    
-    this.server.set( // 퍼블릭 파일 경로
-      'public', publicPath,
+    this.server.use( // 디바이스
+      device.capture(),
     );
+    // device.enableDeviceHelpers(this.server);
 
     // 비동기 라우팅
     this.server.all('*', asyncHandler(async(request, response, next)=>{

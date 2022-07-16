@@ -7,8 +7,12 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APP</title>
+  <% if (isProd) { %>
+    <script defer="defer" src="scripts/bundle.min.js"></script>
+    <link rel="stylesheet" href="styles/bundle.min.css">
+  <% } %>
 </head>
 <body>
-  <div id="app-root"></div>
+  <div id="app-root" class="<%=isDesktop?'desktop':'mobile'%>"></div>
 </body>
 </html>
