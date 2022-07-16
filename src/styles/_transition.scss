@@ -15,26 +15,30 @@ $transition-page: all 350ms;
   // z-index: 1;
   // 마운트 전
   &.anim-enter {
-    filter: brightness(0.25);
+    // filter: brightness(0.25);
+    opacity: 0.25;
     transform: scale(0.9);
   }
 
   // 마운트 활성화
   &.anim-enter-active {
-    filter: brightness(1);
+    // filter: brightness(1);
+    opacity: 1;
     transform: scale(1);
     transition: $transition-page;
   }
 
   // 언마운트 전
   &.anim-exit {
-    filter: brightness(1);
+    // filter: brightness(1);
+    opacity: 1;
     transform: scale(1);
   }
 
   // 언마운트 활성화
   &.anim-exit-active {
-    filter: brightness(0.25);
+    // filter: brightness(0.25);
+    opacity: 0.25;
     transform: scale(0.9);
     transition: $transition-page;
   }

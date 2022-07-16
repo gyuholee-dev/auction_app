@@ -60,7 +60,7 @@ aside {
 }
 
 .dimm {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   z-index: -1;
@@ -113,7 +113,7 @@ i {
 header:not(:empty) {
   height: 56px;
   transition: height 0.25s;
-  border-bottom: 1px solid rgba(black, 0.35);
+  border-bottom: 1px solid var(--color-border);
 }
 #page-search-result, #page-myauction {
   header:not(:empty) {
@@ -199,7 +199,7 @@ nav {
 }
 
 footer:not(:empty) {
-  border-top: 1px solid rgba(black, 0.35);
+  border-top: 1px solid var(--color-border);
 }
 
 #bottommenu {
