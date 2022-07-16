@@ -1,7 +1,7 @@
 export const appConfig = {
   title: '슈퍼레어',
   subTitle: '',
-  theme: 'dark',
+  theme: 'auto', // auto, dark, light
   pages: {
     home: {
       path: '/',

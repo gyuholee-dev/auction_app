@@ -12,6 +12,21 @@
 }
 #app-root.desktop {
   max-width: 480px;
+  // 스크롤바
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 4px;
+    border-radius: 0;
+    background-color: var(--color-scrollbar);
+  }
 }
 
 [id^=page-] {
@@ -240,7 +255,7 @@ footer:not(:empty) {
 main {
   height: inherit;
   flex-grow: 1;
-  overflow-y: scroll;
+  overflow-y: overlay;
   // position: absolute;
 
   section {
