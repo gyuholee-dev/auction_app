@@ -145,7 +145,6 @@ export default class Router {
           ...device,
           isProd: true,
         }
-        console.log(path.join(viewsPath, document));
         if (fs.existsSync(path.join(viewsPath, document))) {
           response.render(document, data);
         } else {
