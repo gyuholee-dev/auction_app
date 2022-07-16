@@ -8,6 +8,9 @@ import { userConfig } from './configs/server.config.js';
 let config = {
   hostname: 'localhost',
   port: 8080,
+  static: false,
+  view: 'html',
+  main: 'index.html',
   // 디렉토리
   paths : {
     app: "app",

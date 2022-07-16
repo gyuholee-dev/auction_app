@@ -39,12 +39,15 @@ export default class Server {
     this.server.use( // 디바이스
       device.capture(),
     );
-    // device.enableDeviceHelpers(this.server);
 
     // 비동기 라우팅
     this.server.all('*', asyncHandler(async(request, response, next)=>{
       try {
-        await this.router.route(request, response);
+        if (config.static) {
+          await this.router.static(request, response);
+        } else {
+          await this.router.route(request, response);
+        }
       } catch (error) {
         next(error);
       }
